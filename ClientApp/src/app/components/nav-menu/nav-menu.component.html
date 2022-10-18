@@ -1,0 +1,70 @@
+<header>
+  <!--<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']" style="color:#fff!important">cafeconmiel</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+              aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end" [ngClass]="{ show: isExpanded }">
+        <ul class="navbar-nav flex-grow">
+          <li class="nav-item" [routerLinkActive]="['link-active']"
+              [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link text-dark" [routerLink]="['/']" style="color:#fff!important">Presentación</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/counter']" style="color:#fff!important">Equipo de investigación</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/fetch-data']" style="color:#fff!important">Consulta de los corpus</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/fetch-data']" style="color:#fff!important">Bibliografía y actividades</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>-->
+
+  <mat-toolbar>
+
+    <div>
+      <mat-toolbar-row style="margin-top:20px">
+
+        <p style="font-size: xx-large;">CafeConMiel</p>
+        <span class="menu-spacer"></span>
+      </mat-toolbar-row>
+
+      <mat-toolbar-row style="margin-top:10px">
+        <span style="font-size: 18px;">Corpus Automático y Fenómenos de Contacto en Mallorca: </span><br />
+      </mat-toolbar-row>
+
+      <mat-toolbar-row>
+
+        <span style="font-size: 18px;">Inteligencia, Entrenamiento y Lengua </span>
+      </mat-toolbar-row>
+
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+           viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+          <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+        </g>
+      </svg>
+    </div>
+  </mat-toolbar>
+
+  <div style="text-align:end; margin-top:5px;">
+    <a mat-button style="border: 1px solid #8d6e63; margin :1px" (click)="setOptionMenu('p')"> Presentación </a>
+    <a mat-button style="border: 1px solid #8d6e63; margin :1px" (click)="setOptionMenu('e')"> Equipo de investigación </a>
+    <a mat-button style="border: 1px solid #8d6e63; margin: 1px" (click)="setOptionMenu('c')"> Consulta de los corpus </a>
+    <a mat-button style="border: 1px solid #8d6e63; margin: 1px" (click)="setOptionMenu('b')"> Bibliografía y actividades </a>
+
+  </div>
+
+</header>
