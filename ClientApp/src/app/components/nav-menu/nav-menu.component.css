@@ -17,11 +17,11 @@ html {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 .navbar {
-  background-image:url(../../assets/images/banner3.png)
+  background-image: url(../../../assets/images/banner3.png)
 }
 
 .mat-toolbar {
-  background: url('../../assets/images/banner.jpg') no-repeat center;
+  background: url('../../../assets/images/banner.jpg') no-repeat center;
   background-size: cover;
   color: #000;
 }
