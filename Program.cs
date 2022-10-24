@@ -1,11 +1,32 @@
+using cafeconmiel.Models.MongoConfig;
+using cafeconmiel.Services;
+using Microsoft.OpenApi.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Services.Configure<DocumentDatabaseSettings>(
+	builder.Configuration.GetSection("BookStoreDatabase"));
 // Add services to the container.
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.Configure<DocumentDatabaseSettings>(
+	builder.Configuration.GetSection("DocumentsDatabase"));
+
+builder.Services.AddSingleton<DocumentsService>();
 
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+	c.SwaggerEndpoint("/swagger/v1/swagger.json", "CFM API");
+	c.RoutePrefix = "swagger";
+});
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
