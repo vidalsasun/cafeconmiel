@@ -1,26 +1,64 @@
+using cafeconmiel.Interfaces;
 using cafeconmiel.Models.MongoConfig;
 using cafeconmiel.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.Configure<DocumentDatabaseSettings>(
-	builder.Configuration.GetSection("BookStoreDatabase"));
-// Add services to the container.
+// Auth
 
+builder.Services.AddAuthentication(x =>
+{
+	x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+	x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x =>
+{
+	x.RequireHttpsMetadata = false;
+	x.SaveToken = true;
+	x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+	{
+		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"])),
+		ValidateAudience = false,
+		ValidateIssuerSigningKey = true,
+		ValidateIssuer = false
+	};
+});
+builder.Services.AddAuthorization(options =>
+{
+	var defaultAuthorizationPolicyBuilder = new AuthorizationPolicyBuilder(
+		JwtBearerDefaults.AuthenticationScheme);
+
+	defaultAuthorizationPolicyBuilder =
+		defaultAuthorizationPolicyBuilder.RequireAuthenticatedUser();
+
+	options.DefaultPolicy = defaultAuthorizationPolicyBuilder.Build();
+});
+builder.Services.AddSingleton<IJwtAuthenticationService>(new JwtAuthenticationService(builder.Configuration["Jwt:SecretKey"]));
+
+
+
+// MongoDB Settings
+builder.Services.Configure<DocumentDatabaseSettings>(
+builder.Configuration.GetSection("DocumentsDatabase"));
+builder.Services.AddSingleton<DocumentsService>();
+
+
+
+
+// Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-builder.Services.Configure<DocumentDatabaseSettings>(
-	builder.Configuration.GetSection("DocumentsDatabase"));
-
-builder.Services.AddSingleton<DocumentsService>();
 
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+// Swagger
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
@@ -43,6 +81,5 @@ app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller}/{action=Index}/{id?}");
 
-app.MapFallbackToFile("index.html"); ;
-
+app.MapFallbackToFile("index.html");
 app.Run();

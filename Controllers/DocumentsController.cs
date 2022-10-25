@@ -1,17 +1,20 @@
 ﻿using cafeconmiel.Models;
 using cafeconmiel.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cafeconmiel.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]
+	//[Authorize]
 	public class DocumentsController : ControllerBase
 	{
 		private readonly DocumentsService _documentsService;
 
 		public DocumentsController(DocumentsService documentsService) =>
 			_documentsService = documentsService;
+
 
 		[HttpGet]
 		public async Task<List<Documentos>> Get() =>
