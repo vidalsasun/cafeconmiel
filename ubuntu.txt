@@ -1,0 +1,9 @@
+﻿sudo mv /var/www/cafeconmiel /var/www/cafeconmiel_back[FECHAACTUAL dd/MM/yyyy]
+
+copiar publish de netcore a /var/tmp/cafeconmiel
+sudo mv /var/tmp/cafeconmiel /var/www/cafeconmiel
+
+sudo systemctl stop cafeconmiel.service
+sudo systemctl start cafeconmiel.service
+
+sudo service apache2 restart
