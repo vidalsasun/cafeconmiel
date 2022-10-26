@@ -17,6 +17,7 @@ import { PresentacionComponent } from './components/presentacion/presentacion.co
 import { EquipoComponent } from './components/equipo/equipo.component';
 import { ConsultaComponent } from './components/consulta/consulta.component';
 import { BibliografiaComponent } from './components/bibliografia/bibliografia.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { BibliografiaComponent } from './components/bibliografia/bibliografia.co
     PresentacionComponent,
     EquipoComponent,
     ConsultaComponent,
-    BibliografiaComponent
+    BibliografiaComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
