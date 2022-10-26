@@ -14,12 +14,12 @@ export class ClaimService {
     this.claim = new UserClaimsModel();
   }
 
-  getClaim(appKey: string): Observable<any> {
+  getClaim(appKey: string, appPass: string): Observable<any> {
 
-    this.claim.App = appKey;
-    this.claim.Code = 'lalero';
+    this.claim.code = appPass;
+    this.claim.app = appKey;
     return this.http.post(this.baseUrl + 'api/Login', JSON.stringify(this.claim), {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
-    })
+    });
   }
 }

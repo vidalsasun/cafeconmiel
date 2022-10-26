@@ -22,8 +22,6 @@ namespace cafeconmiel.Controllers
 			new User { App = "lalero", Code = "lalero" },
 		};
 
-
-
 		public LoginController(IConfiguration config,
 			IJwtAuthenticationService authService,
 			IWebHostEnvironment env

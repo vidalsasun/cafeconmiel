@@ -1,4 +1,4 @@
 export class UserClaimsModel {
-  Code: string | undefined;
-  App: string | undefined;
+  code: string | undefined;
+  app: string | undefined;
 } 

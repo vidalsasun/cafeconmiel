@@ -1,4 +1,36 @@
-﻿sudo mv /var/www/cafeconmiel /var/www/cafeconmiel_back[FECHAACTUAL dd/MM/yyyy]
+﻿S'ha generat la màquina virtual correctament. Les dades d'accés SSH són les següents:
+
+- Adreça IP del servidor: 130.206.132.19
+
+- Nom DNS: cafeconmiel.uib.es / cafeconmiel.uib.cat / cafeconmiel.uib.eu
+
+- Usuari: cafeconmiel
+
+- Contrasenya: nsts3s1s3st3g3
+
+- Sistema operatiu: Ubuntu 22.04 LTS
+
+- Espai de disc: 30GB
+
+Tot i que el servidor té configurada una adreça IP pública, el tallafocs corporatiu de la UIB només permet accedir al servidor als ports:
+- 22 (ssh) des de la xarxa de la UIB o VPN.
+- 80 des de qualsevol xarxa
+- 443 des de qualsevol xarxa
+
+S'ha creat un certificat SSL per poder configurar el servei amb HTTPS.
+El certificat es troba a: /etc/letsencrypt/live/cafeconmiel/fullchain.pem
+i la clau a:              /etc/letsencrypt/live/cafeconmiel/privkey.pem
+El certificat expira el dia 20-10-2023.
+El certificat es renovarà automàticament i per tant s'actualitzaran aquests fitxers.
+
+Per tal de complir amb la llei LPDGDD (Llei de Protecció de Dades i Garantia dels Drets Digitals) una vegada publicada la pàgina web cal adreçar-se a na caty.pou@uib.es. Per més informació: https://seu.uib.cat/es/LOPDGDD/.
+
+Si accediu per SSH des d'Internet, primer cal establir una connexió VPN de la UIB.
+Per a qualsevol dubte o incidència enviar un correu electrònic a suport.webhosting@uib.es
+
+
+
+sudo mv /var/www/cafeconmiel /var/www/cafeconmiel_back[FECHAACTUAL dd/MM/yyyy]
 
 copiar publish de netcore a /var/tmp/cafeconmiel
 sudo mv /var/tmp/cafeconmiel /var/www/cafeconmiel

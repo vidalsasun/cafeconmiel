@@ -13,10 +13,6 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.claimService.getClaim("lalero").subscribe(result => {
-      return result.token;
-      //this.localService.setJsonValue('appId', result.token);
-    });    
   }
   title = 'app';
 }
