@@ -30,7 +30,7 @@ Per a qualsevol dubte o incidència enviar un correu electrònic a suport.webhos
 
 
 
-sudo mv /var/www/cafeconmiel /var/www/cafeconmiel_back[FECHAACTUAL dd/MM/yyyy]
+sudo mv /var/www/cafeconmiel /var/www/cafeconmiel_back_30102022
 
 copiar publish de netcore a /var/tmp/cafeconmiel
 sudo mv /var/tmp/cafeconmiel /var/www/cafeconmiel
