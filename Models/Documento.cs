@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace cafeconmiel.Models
 {
-	public class Documentos
+	public class Documento
 	{
 		[BsonId]
 		[BsonRepresentation(BsonType.ObjectId)]

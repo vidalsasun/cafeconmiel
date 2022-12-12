@@ -43,7 +43,7 @@ builder.Services.AddSingleton<IJwtAuthenticationService>(new JwtAuthenticationSe
 
 
 // MongoDB Settings
-builder.Services.Configure<DocumentDatabaseSettings>(
+builder.Services.Configure<DatabaseSettings>(
 builder.Configuration.GetSection("DocumentsDatabase"));
 builder.Services.AddSingleton<DocumentsService>();
 

@@ -17,11 +17,11 @@ namespace cafeconmiel.Controllers
 
 
 		[HttpGet]
-		public async Task<List<Documentos>> Get() =>
+		public async Task<List<Documento>> Get() =>
 			await _documentsService.GetAsync();
 
 		[HttpGet("{id:length(24)}")]
-		public async Task<ActionResult<Documentos>> Get(string id)
+		public async Task<ActionResult<Documento>> Get(string id)
 		{
 			var document = await _documentsService.GetAsync(id);
 
@@ -34,7 +34,7 @@ namespace cafeconmiel.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Post(Documentos newDocument)
+		public async Task<IActionResult> Post(Documento newDocument)
 		{
 			await _documentsService.CreateAsync(newDocument);
 
@@ -42,7 +42,7 @@ namespace cafeconmiel.Controllers
 		}
 
 		[HttpPut("{id:length(24)}")]
-		public async Task<IActionResult> Update(string id, Documentos updatedDocument)
+		public async Task<IActionResult> Update(string id, Documento updatedDocument)
 		{
 			var document = await _documentsService.GetAsync(id);
 
