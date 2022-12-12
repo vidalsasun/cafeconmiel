@@ -30,7 +30,6 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\app\interceptors\" />
-    <Folder Include="ClientApp\src\app\reactive\" />
     <Folder Include="ClientApp\src\app\services\http\mongo\documents\" />
   </ItemGroup>
 

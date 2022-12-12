@@ -4,9 +4,14 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.navbar-toggler-icon {
+  color: #f7d61a !important;
+}
+
 html {
   font-size: 14px;
 }
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -16,8 +21,10 @@ html {
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
+
 .navbar {
-  background-image: url(../../../assets/images/banner3.png)
+  /*background-image: url(../../../assets/images/banner3.png)*/
+  background-color: #4b3838 !important;
 }
 
 .mat-toolbar {
@@ -25,6 +32,7 @@ html {
   background-size: cover;
   color: #000;
 }
+
 .flex { /*Flexbox for containers*/
   display: flex;
   justify-content: center;

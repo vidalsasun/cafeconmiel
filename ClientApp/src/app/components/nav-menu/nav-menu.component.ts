@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TokenService } from '../../reactive/login.service';
 import { MenuService } from '../../reactive/menu.service';
 
 @Component({
@@ -6,13 +7,18 @@ import { MenuService } from '../../reactive/menu.service';
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
-export class NavMenuComponent {
+export class NavMenuComponent implements OnInit {
 
-
+  token: string = '';
   isExpanded = false;
 
-  constructor(private menuService: MenuService) {
+  constructor(private menuService: MenuService, private tokenService: TokenService) {
   }
+    ngOnInit(): void {
+      this.tokenService.getToken.subscribe(option => {
+        this.token = option;
+      });
+    }
 
   collapse() {
     this.isExpanded = false;

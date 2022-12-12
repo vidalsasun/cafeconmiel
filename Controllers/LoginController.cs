@@ -19,7 +19,7 @@ namespace cafeconmiel.Controllers
 
 		private List<User> appUsers = new List<User>
 		{
-			new User { App = "lalero", Code = "lalero" },
+			new User { App = "admincfm", Code = "cfmadmin" },
 		};
 
 		public LoginController(IConfiguration config,
