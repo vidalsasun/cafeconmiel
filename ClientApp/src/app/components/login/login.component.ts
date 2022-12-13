@@ -26,7 +26,7 @@ export class LoginComponent {
       this.claimService.getClaim(this.form.value.username, this.form.value.password).subscribe(response => {
         const r = response;
         this.tokenService.setToken(r.token);
-        this.loginResult = "login ok";
+        //this.loginResult = "login ok";
       }, error => {
         this.loginResult = "login error, try again";
       });;

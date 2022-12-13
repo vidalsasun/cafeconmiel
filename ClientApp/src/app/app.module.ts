@@ -22,6 +22,7 @@ import { EquipoComponent } from './components/equipo/equipo.component';
 import { ConsultaComponent } from './components/consulta/consulta.component';
 import { BibliografiaComponent } from './components/bibliografia/bibliografia.component';
 import { LoginComponent } from './components/login/login.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { LoginComponent } from './components/login/login.component';
     EquipoComponent,
     ConsultaComponent,
     BibliografiaComponent,
-    LoginComponent
+    LoginComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
