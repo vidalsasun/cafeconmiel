@@ -23,6 +23,7 @@ import { ConsultaComponent } from './components/consulta/consulta.component';
 import { BibliografiaComponent } from './components/bibliografia/bibliografia.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AdminComponent } from './components/admin/admin.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     MatToolbarModule,
+    MatTableModule,
     MatIconModule,
     MatCardModule,
     MatInputModule,

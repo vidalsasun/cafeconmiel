@@ -26,6 +26,11 @@
           <li class="nav-item" *ngIf="token != ''">
             <a class="nav-link text-dark" (click)="setOptionMenu('a')" style="color: #f7d61a !important; cursor: pointer; border: 1px solid #f7d61a; border-radius: 4px; margin: 2px; ">Admin</a>
           </li>
+          <li class="nav-item" *ngIf="token != ''">
+            <a class="nav-link text-dark" (click)="closeConnection()" style="color: #f7d61a !important; cursor: pointer; border: 1px solid #f7d61a; border-radius: 4px; margin: 2px; ">Cerrar conexión</a>
+          </li>
+
+
         </ul>
       </div>
     </div>

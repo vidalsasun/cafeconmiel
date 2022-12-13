@@ -30,5 +30,8 @@ export class NavMenuComponent implements OnInit {
   setOptionMenu(option: string) {
     this.menuService.setMenu(option);
   }
-
+  closeConnection() {
+    this.tokenService.setToken('');
+    this.menuService.setMenu('p');
+  }
 }
