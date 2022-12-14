@@ -26,15 +26,18 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\models\mongo\documents.ts" />
+    <None Remove="ClientApp\src\app\models\mongo\users.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ClientApp\src\app\interceptors\" />
     <Folder Include="ClientApp\src\app\services\http\mongo\documents\" />
+    <Folder Include="ClientApp\src\app\services\http\mongo\users\" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\models\mongo\documents.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\mongo\users.ts" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

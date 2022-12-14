@@ -19,7 +19,7 @@ namespace cafeconmiel.Controllers
 
 		private List<User> appUsers = new List<User>
 		{
-			new User { App = "admincfm", Code = "cfmadmin" },
+			new User { Login = "admincfm", Pass = "cfmadmin" },
 		};
 
 		public LoginController(IConfiguration config,
@@ -49,10 +49,10 @@ namespace cafeconmiel.Controllers
 		User AuthenticateUser(User loginCredentials)
 		{
 			//User user = appUsers.SingleOrDefault(x => (x.App == loginCredentials.App && isHotelToken(x.Code)));
-			var user = appUsers.SingleOrDefault(x => x.Code == loginCredentials.Code);
+			var user = appUsers.SingleOrDefault(x => x.Login == loginCredentials.Login && x.Pass == loginCredentials.Pass);
 			if (user != null)
 			{
-				user.Code = loginCredentials.Code;
+				user.id = loginCredentials.id;
 				return user;
 			}
 			return user;
@@ -64,9 +64,9 @@ namespace cafeconmiel.Controllers
 			var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 			var claims = new[]
 			{
-				new Claim(JwtRegisteredClaimNames.Sub, userInfo.Code),
-				new Claim("app", userInfo.App),
-				new Claim("code",userInfo.Code),
+				new Claim(JwtRegisteredClaimNames.Sub, userInfo.id),
+				new Claim("login", userInfo.Login),
+				new Claim("pass",userInfo.Pass),
 				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
 			};
 			var token = new JwtSecurityToken(

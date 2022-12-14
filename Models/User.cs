@@ -2,9 +2,11 @@
 {
 	public class User
 	{
-		public string? Id { get; set; }
-		public string? Code { get; set; }
-		public string? App { get; set; }
+		public string id { get; set; }
+		public string Name { get; set; }
+		public string Login { get; set; }
+		public string Pass { get; set; }
+		public DateTime Creationdate { get; set; }
 
 	}
 }

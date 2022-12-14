@@ -5,12 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace cafeconmiel.Controllers
 {
-	public class UserController : Controller
+	[ApiController]
+	[Route("api/[controller]")]
+	public class UsersController : ControllerBase
 	{
 
 		private readonly UsersService _usersService;
 
-		public UserController(UsersService usersService) =>
+		public UsersController(UsersService usersService) =>
 			_usersService = usersService;
 
 
@@ -37,7 +39,7 @@ namespace cafeconmiel.Controllers
 		{
 			await _usersService.CreateAsync(newUser);
 
-			return CreatedAtAction(nameof(Get), new { id = newUser.Id }, newUser);
+			return CreatedAtAction(nameof(Get), new { id = newUser.id }, newUser);
 		}
 
 		[HttpPut("{id:length(24)}")]
@@ -50,7 +52,7 @@ namespace cafeconmiel.Controllers
 				return NotFound();
 			}
 
-			updatedUser.Id = user.Id;
+			updatedUser.id = user.id;
 
 			await _usersService.UpdateAsync(id, updatedUser);
 
@@ -60,9 +62,9 @@ namespace cafeconmiel.Controllers
 		[HttpDelete("{id:length(24)}")]
 		public async Task<IActionResult> Delete(string id)
 		{
-			var document = await _usersService.GetAsync(id);
+			var user = await _usersService.GetAsync(id);
 
-			if (document is null)
+			if (user is null)
 			{
 				return NotFound();
 			}

@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
+import { user } from '../../models/mongo/users';
+import { UsersService } from '../../services/http/mongo/users/users.service';
 
 export interface PeriodicElement {
   name: string;
@@ -27,10 +29,19 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
+    this.usersService.post({
+      id: '001',
+      name: 'Ruth',
+      login: 'rcfm',
+      pass: 'cfmr',
+      creationdate: new Date()
+    });
   }
+
+
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = [...ELEMENT_DATA];
 
