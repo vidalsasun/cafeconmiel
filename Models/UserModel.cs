@@ -12,6 +12,7 @@ namespace cafeconmiel.Models
 		public string Name { get; set; } = null!;
 		public string Login { get; set; } = null!;
 		public string Pass { get; set; } = null!;
+		public bool isAdmin { get; set; } = false!;
 		public string Creationdate { get; set; } = null!;
 
 	}

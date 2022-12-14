@@ -18,8 +18,7 @@ namespace cafeconmiel.Services
 			var mongoDatabase = mongoClient.GetDatabase(
 				documentsDatabaseSettings.Value.DatabaseName);
 
-			_DocumentsCollection = mongoDatabase.GetCollection<DocumentModel>(
-				documentsDatabaseSettings.Value.CollectionName);
+			_DocumentsCollection = mongoDatabase.GetCollection<DocumentModel>("documentos");
 		}
 
 		public async Task<List<DocumentModel>> GetAsync() =>

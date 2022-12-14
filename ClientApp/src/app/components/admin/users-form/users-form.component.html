@@ -1,0 +1,18 @@
+<form [formGroup]="form"
+      (ngSubmit)="onFormSubmit()"
+      class="form-material"
+      style="margin-top: 15px !important">
+
+
+  <div style="margin-bottom:14px!important;">
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput
+             name="name"
+             id="name"
+             formControlName="name"
+             required />
+    </mat-form-field>
+  </div>
+
+</form>

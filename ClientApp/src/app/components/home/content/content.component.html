@@ -1,0 +1,20 @@
+<div fxLayout="column">
+  <ng-container *ngIf="op==='p' || op===''">
+    <app-presentacion></app-presentacion>
+  </ng-container>
+  <ng-container *ngIf="op==='e'">
+    <app-equipo></app-equipo>
+  </ng-container>
+  <ng-container *ngIf="op==='c'">
+    <app-consulta></app-consulta>
+  </ng-container>
+  <ng-container *ngIf="op==='b'">
+    <app-bibliografia></app-bibliografia>
+  </ng-container>
+  <ng-container *ngIf="op==='l'">
+    <app-login></app-login>
+  </ng-container>
+  <ng-container *ngIf="op==='a'">
+    <app-admin></app-admin>
+  </ng-container>
+</div>

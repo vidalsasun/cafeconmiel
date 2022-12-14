@@ -1,7 +1,8 @@
 export class user {
-  id: string = '';
+  id?: string = '';
   name: string = '';
   login: string = '';
   pass: string = '';
+  isadmin: boolean = false;
   creationdate!: Date;
 }

@@ -18,8 +18,7 @@ namespace cafeconmiel.Services
 			var mongoDatabase = mongoClient.GetDatabase(
 				usersDatabaseSettings.Value.DatabaseName);
 
-			_userCollection = mongoDatabase.GetCollection<UserModel>(
-				usersDatabaseSettings.Value.CollectionName);
+			_userCollection = mongoDatabase.GetCollection<UserModel>("usuarios");
 		}
 
 		public async Task<List<UserModel>> GetAsync() =>

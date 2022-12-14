@@ -1,31 +1,5 @@
 
 <div fxLayout="row" fxLayoutAlign="space-between" style="display:flex;">
-  <div fxLayout="column" style="width: 25%;">
-    <img src="../../assets/images/Conselleria.png" width="200"><br>
-    <img src="../../assets/images/ifisc-marcas-vertical.png" width="200"><br>
-    <img src="../../assets/images/Illes_sostenibles.png" width="200" ter>
-    <img src="../../assets/images/logo_uib.gif" width="200" style="margin-top:25px;" ter>
-
-  </div>
-  <div fxLayout="column" style="width: 80%;">
-    <ng-container *ngIf="op==='p' || op===''">
-      <app-presentacion></app-presentacion>
-    </ng-container>
-    <ng-container *ngIf="op==='e'">
-      <app-equipo></app-equipo>
-    </ng-container>
-    <ng-container *ngIf="op==='c'">
-      <app-consulta></app-consulta>
-    </ng-container>
-    <ng-container *ngIf="op==='b'">
-      <app-bibliografia></app-bibliografia>
-    </ng-container>
-    <ng-container *ngIf="op==='l'">
-      <app-login></app-login>
-    </ng-container>
-    <ng-container *ngIf="op==='a'">
-      <app-admin></app-admin>
-    </ng-container>
-
-  </div>
+  <app-logos></app-logos>
+  <app-content></app-content>
 </div>

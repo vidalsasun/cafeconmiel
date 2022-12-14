@@ -22,8 +22,13 @@ import { EquipoComponent } from './components/equipo/equipo.component';
 import { ConsultaComponent } from './components/consulta/consulta.component';
 import { BibliografiaComponent } from './components/bibliografia/bibliografia.component';
 import { LoginComponent } from './components/login/login.component';
-import { AdminComponent } from './components/admin/admin.component';
+import { AdminComponent } from './components/admin/users-table/admin.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { UsersFormComponent } from './components/admin/users-form/users-form.component';
+import { LogosComponent } from './components/home/logos/logos.component';
+import { ContentComponent } from './components/home/content/content.component';
+import { FooterComponent } from './components/home/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +40,11 @@ import { MatTableModule } from '@angular/material/table';
     ConsultaComponent,
     BibliografiaComponent,
     LoginComponent,
-    AdminComponent
+    UsersFormComponent,
+    AdminComponent,
+    LogosComponent,
+    ContentComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -45,6 +54,7 @@ import { MatTableModule } from '@angular/material/table';
     MatIconModule,
     MatCardModule,
     MatInputModule,
+    MatPaginatorModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([

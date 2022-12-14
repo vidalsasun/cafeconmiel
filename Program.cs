@@ -40,11 +40,8 @@ builder.Services.AddAuthorization(options =>
 });
 builder.Services.AddSingleton<IJwtAuthenticationService>(new JwtAuthenticationService(builder.Configuration["Jwt:SecretKey"]));
 
-
-
 // MongoDB Settings
-builder.Services.Configure<DatabaseSettings>(
-builder.Configuration.GetSection("DocumentsDatabase"));
+builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("CFMDatabase"));
 builder.Services.AddSingleton<DocumentsService>();
 builder.Services.AddSingleton<UsersService>();
 
