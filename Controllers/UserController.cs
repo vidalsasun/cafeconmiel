@@ -17,12 +17,12 @@ namespace cafeconmiel.Controllers
 
 
 		[HttpGet]
-		public async Task<List<User>> Get() =>
+		public async Task<List<UserModel>> Get() =>
 			await _usersService.GetAsync();
 
 
 		[HttpGet("{id:length(24)}")]
-		public async Task<ActionResult<User>> Get(string id)
+		public async Task<ActionResult<UserModel>> Get(string id)
 		{
 			var user = await _usersService.GetAsync(id);
 
@@ -35,7 +35,7 @@ namespace cafeconmiel.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Post(User newUser)
+		public async Task<IActionResult> Post(UserModel newUser)
 		{
 			await _usersService.CreateAsync(newUser);
 
@@ -43,7 +43,7 @@ namespace cafeconmiel.Controllers
 		}
 
 		[HttpPut("{id:length(24)}")]
-		public async Task<IActionResult> Update(string id, User updatedUser)
+		public async Task<IActionResult> Update(string id, UserModel updatedUser)
 		{
 			var user = await _usersService.GetAsync(id);
 

@@ -17,9 +17,9 @@ namespace cafeconmiel.Controllers
 		private readonly IJwtAuthenticationService _authSrv;
 		private readonly IWebHostEnvironment _env;
 
-		private List<User> appUsers = new List<User>
+		private List<ClaimModel> appUsers = new List<ClaimModel>
 		{
-			new User { Login = "admincfm", Pass = "cfmadmin" },
+			new ClaimModel { App = "admincfm", Code = "cfmadmin" },
 		};
 
 		public LoginController(IConfiguration config,
@@ -32,10 +32,10 @@ namespace cafeconmiel.Controllers
 			_env = env;
 		}
 		[HttpPost]
-		public IActionResult Post(User login)
+		public IActionResult Post(ClaimModel login)
 		{
 			IActionResult response = Unauthorized();
-			User user = AuthenticateUser(login);
+			ClaimModel user = AuthenticateUser(login);
 			if (user != null)
 			{
 				var tokenString = GenerateJWTToken(user);
@@ -46,27 +46,27 @@ namespace cafeconmiel.Controllers
 			}
 			return response;
 		}
-		User AuthenticateUser(User loginCredentials)
+		ClaimModel AuthenticateUser(ClaimModel loginCredentials)
 		{
-			//User user = appUsers.SingleOrDefault(x => (x.App == loginCredentials.App && isHotelToken(x.Code)));
-			var user = appUsers.SingleOrDefault(x => x.Login == loginCredentials.Login && x.Pass == loginCredentials.Pass);
+			//ClaimModel user = appUsers.SingleOrDefault(x => (x.App == loginCredentials.App && isHotelToken(x.Code)));
+			var user = appUsers.SingleOrDefault(x => x.Code == loginCredentials.Code);
 			if (user != null)
 			{
-				user.id = loginCredentials.id;
+				user.Id = loginCredentials.Id;
 				return user;
 			}
 			return user;
 		}
 
-		string GenerateJWTToken(User userInfo)
+		string GenerateJWTToken(ClaimModel userInfo)
 		{
 			var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWTSettings:securityKey"]));
 			var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 			var claims = new[]
 			{
-				new Claim(JwtRegisteredClaimNames.Sub, userInfo.id),
-				new Claim("login", userInfo.Login),
-				new Claim("pass",userInfo.Pass),
+				new Claim(JwtRegisteredClaimNames.Sub, userInfo.Code),
+				new Claim("app", userInfo.App),
+				new Claim("code",userInfo.Code),
 				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
 			};
 			var token = new JwtSecurityToken(

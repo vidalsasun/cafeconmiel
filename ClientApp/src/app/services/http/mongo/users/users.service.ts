@@ -17,12 +17,12 @@ export class UsersService {
     })
   }
   getAll(): Observable<Array<user>> {
-    return this.http.get<Array<user>>('/api/user');
+    return this.http.get<Array<user>>('/api/users');
   }
   get(parameter: HttpParams): Observable<any> {
-    return this.http.get<Array<user>>('/api/user', { params: parameter });
+    return this.http.get<Array<user>>('/api/users', { params: parameter });
   }
-  delete(fireid: user): Observable<any> {
-    return this.http.delete('/api/user/' + fireid.id)
+  delete(userid: user): Observable<any> {
+    return this.http.delete('/api/users/' + userid.id)
   }
 }

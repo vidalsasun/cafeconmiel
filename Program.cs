@@ -46,9 +46,7 @@ builder.Services.AddSingleton<IJwtAuthenticationService>(new JwtAuthenticationSe
 builder.Services.Configure<DatabaseSettings>(
 builder.Configuration.GetSection("DocumentsDatabase"));
 builder.Services.AddSingleton<DocumentsService>();
-
-
-
+builder.Services.AddSingleton<UsersService>();
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();

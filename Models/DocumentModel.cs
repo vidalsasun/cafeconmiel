@@ -3,14 +3,14 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace cafeconmiel.Models
 {
-	public class Documento
+	public class DocumentModel
 	{
 		[BsonId]
 		[BsonRepresentation(BsonType.ObjectId)]
 		public string? id { get; set; }
 
 		public string Name { get; set; } = null!;
-
+		
 		public string Date { get; set; } = null!;
 
 		public string Content { get; set; } = null!;

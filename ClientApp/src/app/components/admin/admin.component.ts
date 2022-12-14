@@ -34,10 +34,16 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.usersService.post({
       id: '001',
-      name: 'Ruth',
-      login: 'rcfm',
-      pass: 'cfmr',
+      name: 'admin',
+      login: 'admincfm',
+      pass: 'cfmadmin',
       creationdate: new Date()
+    }).subscribe((result: user) => {
+      if (result) {
+        let u = result;
+      }
+    }, err => {
+      console.log(err)
     });
   }
 

@@ -7,7 +7,7 @@ namespace cafeconmiel.Services
 {
 	public class DocumentsService
 	{
-		private readonly IMongoCollection<Documento> _DocumentsCollection;
+		private readonly IMongoCollection<DocumentModel> _DocumentsCollection;
 
 		public DocumentsService(
 			IOptions<DatabaseSettings> documentsDatabaseSettings)
@@ -18,20 +18,20 @@ namespace cafeconmiel.Services
 			var mongoDatabase = mongoClient.GetDatabase(
 				documentsDatabaseSettings.Value.DatabaseName);
 
-			_DocumentsCollection = mongoDatabase.GetCollection<Documento>(
+			_DocumentsCollection = mongoDatabase.GetCollection<DocumentModel>(
 				documentsDatabaseSettings.Value.CollectionName);
 		}
 
-		public async Task<List<Documento>> GetAsync() =>
+		public async Task<List<DocumentModel>> GetAsync() =>
 			await _DocumentsCollection.Find(_ => true).ToListAsync();
 
-		public async Task<Documento?> GetAsync(string id) =>
+		public async Task<DocumentModel?> GetAsync(string id) =>
 			await _DocumentsCollection.Find(x => x.id == id).FirstOrDefaultAsync();
 
-		public async Task CreateAsync(Documento newDocument) =>
+		public async Task CreateAsync(DocumentModel newDocument) =>
 			await _DocumentsCollection.InsertOneAsync(newDocument);
 
-		public async Task UpdateAsync(string id, Documento updatedDocument) =>
+		public async Task UpdateAsync(string id, DocumentModel updatedDocument) =>
 			await _DocumentsCollection.ReplaceOneAsync(x => x.id == id, updatedDocument);
 
 		public async Task RemoveAsync(string id) =>
