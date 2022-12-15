@@ -26,6 +26,8 @@ import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/users-table/admin.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatMenuModule } from '@angular/material/menu';
+
 import { UsersFormComponent } from './components/admin/users-form/users-form.component';
 import { LogosComponent } from './components/home/logos/logos.component';
 import { ContentComponent } from './components/home/content/content.component';
@@ -66,6 +68,7 @@ import { DocumentosFormComponent } from './components/admin/documentos-form/docu
     MatInputModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatMenuModule,
     FormsModule,
     ReactiveFormsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),

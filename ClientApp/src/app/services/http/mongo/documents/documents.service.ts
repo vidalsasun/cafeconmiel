@@ -22,7 +22,7 @@ export class DocumentsService {
   get(parameter: HttpParams): Observable<any> {
     return this.http.get<Array<document>>('/api/documents', { params: parameter });
   }
-  delete(fireid: document): Observable<any> {
-    return this.http.delete('/api/documents/' + fireid.id)
+  delete(doc: document): Observable<any> {
+    return this.http.delete('/api/documents/' + doc)
   }
 }

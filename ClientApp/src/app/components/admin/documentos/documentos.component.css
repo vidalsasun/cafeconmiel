@@ -1,0 +1,37 @@
+.flexbox {
+  justify-content: center;
+  flex: 0 0 100%;
+}
+
+.mat-column-id {
+  flex: 0 0 10%;
+}
+
+.mat-column-name {
+  flex: 0 0 25%;
+}
+
+.mat-column-date {
+  flex: 0 0 10%;
+}
+
+.mat-column-content {
+  flex: 0 0 30%;
+}
+
+.mat-column-author {
+  flex: 0 0 15%;
+}
+
+.mat-column-editaction {
+  flex: 0 0 5%;
+  box-shadow: none !important;
+}
+
+.mat-column-deleteaction {
+  flex: 0 0 5%;
+}
+
+.minifab-no-shadow {
+  box-shadow: none !important;
+}

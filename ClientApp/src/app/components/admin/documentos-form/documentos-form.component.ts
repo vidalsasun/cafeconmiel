@@ -33,7 +33,6 @@ export class DocumentosFormComponent implements OnInit {
     this.form.addControl("author", new FormControl((this.local_data ? this.local_data.author : ''), Validators.required));
   }
   onFormSubmit() {
-    if (!this.local_data.id) {
       this.documentsService.post({       
         name: this.form.value.name,
         content: this.form.value.content,
@@ -46,6 +45,5 @@ export class DocumentosFormComponent implements OnInit {
       }, err => {
         console.log(err)
       });
-    }
   }
 }

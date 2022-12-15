@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { MatDialogRef } from "@angular/material/dialog";
 import { Store } from "@ngrx/store";
 import { reduxLoginModel } from "../../models/redux/login";
 //import { TokenService } from "../../reactive/login.service";
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
   constructor(public fb: FormBuilder,
     public claimService: ClaimService,
     //private tokenService: TokenService,
+    public dialogRef: MatDialogRef<LoginComponent>,
     private menuService: MenuService,
     private store: Store) {
     this.loginredux = new reduxLoginModel();
@@ -45,13 +47,14 @@ export class LoginComponent implements OnInit {
         this.loginredux.token = r.rModel.token;
         this.loginredux.isAdmin = r.rModel.isAdmin;
         this.store.dispatch(LoginActions.loginUser({ loginData: this.loginredux }));
-
-        if (r.rModel.isAdmin) {
+        this.menuService.setMenu('p');
+        this.dialogRef.close();
+        /*if (r.rModel.isAdmin) {
           this.menuService.setMenu('a');
         }
         else {
           this.menuService.setMenu('d');
-        }
+        }*/
         //this.loginResult = "login ok";
       }, error => {
         this.loginResult = "login error, try again";
