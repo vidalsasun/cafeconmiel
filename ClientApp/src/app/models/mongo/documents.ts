@@ -1,5 +1,5 @@
 export class document {
-  id: string = '';
+  id?: string = '';
   name: string = '';
   date!: Date;
   content: string = '';

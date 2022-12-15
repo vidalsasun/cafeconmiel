@@ -11,7 +11,7 @@ export class DocumentsService {
   constructor(private http: HttpClient) {
   }
 
-  post(model: Array<document>): Observable<any> {
+  post(model: document): Observable<any> {
     return this.http.post('/api/documents', JSON.stringify(model), {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
     })

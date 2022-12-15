@@ -30,8 +30,8 @@ namespace cafeconmiel.Services
 		public async Task CreateAsync(UserModel newUser) =>
 			await _userCollection.InsertOneAsync(newUser);
 
-		public async Task UpdateAsync(string id, UserModel updatedUser) =>
-			await _userCollection.ReplaceOneAsync(x => x.id == id, updatedUser);
+		public async Task UpdateAsync(UserModel updatedUser) =>
+			await _userCollection.ReplaceOneAsync(x => x.id == updatedUser.id, updatedUser);
 
 		public async Task RemoveAsync(string id) =>
 			await _userCollection.DeleteOneAsync(x => x.id == id);

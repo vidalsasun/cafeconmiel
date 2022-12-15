@@ -1,0 +1,19 @@
+.flexbox {
+  display: flex;
+  height: 80vh;
+}
+.home-flex-logos {
+  flex: 0 0 20%;
+}
+.home-flex-content {
+  flex: 0 0 80%;
+}
+
+.flexbox-footer {
+  display: flex;
+  justify-content: center;
+}
+.home-flex-footer {
+  transform: translateY(100%);
+  display: inline-block;
+}

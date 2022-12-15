@@ -1,4 +1,4 @@
-<div fxLayout="column">
+
   <ng-container *ngIf="op==='p' || op===''">
     <app-presentacion></app-presentacion>
   </ng-container>
@@ -17,4 +17,7 @@
   <ng-container *ngIf="op==='a'">
     <app-admin></app-admin>
   </ng-container>
-</div>
+  <ng-container *ngIf="op==='d'">
+    <app-documentos></app-documentos>
+  </ng-container>
+

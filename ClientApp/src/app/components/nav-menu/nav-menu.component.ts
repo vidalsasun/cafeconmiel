@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { TokenService } from '../../reactive/login.service';
+import { Store } from '@ngrx/store';
+import { reduxLoginModel } from '../../models/redux/login';
+//import { TokenService } from '../../reactive/login.service';
 import { MenuService } from '../../reactive/menu.service';
+import { LoginActions, LoginSelectors } from '../../store/login';
 
 @Component({
   selector: 'app-nav-menu',
@@ -11,13 +14,24 @@ export class NavMenuComponent implements OnInit {
 
   token: string = '';
   isExpanded = false;
+  loginredux!: reduxLoginModel;
 
-  constructor(private menuService: MenuService, private tokenService: TokenService) {
+  constructor(private menuService: MenuService,
+    //private tokenService: TokenService,
+    private store: Store) {
+    this.loginredux = new reduxLoginModel();
   }
     ngOnInit(): void {
-      this.tokenService.getToken.subscribe(option => {
-        this.token = option;
+
+      this.store.select(LoginSelectors.token).subscribe(result => {
+        this.loginredux = result[0] as reduxLoginModel;
+      }, err => {
+        console.log(err.error);
       });
+
+      /*this.tokenService.getToken.subscribe(option => {
+        this.token = option;
+      });*/
     }
 
   collapse() {
@@ -31,7 +45,8 @@ export class NavMenuComponent implements OnInit {
     this.menuService.setMenu(option);
   }
   closeConnection() {
-    this.tokenService.setToken('');
+    this.store.dispatch(LoginActions.disconectUser({ loginData: new reduxLoginModel() }));
+    //this.tokenService.setToken('');
     this.menuService.setMenu('p');
   }
 }

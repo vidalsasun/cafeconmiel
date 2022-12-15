@@ -7,6 +7,7 @@ var user = /** @class */ (function () {
         this.name = '';
         this.login = '';
         this.pass = '';
+        this.isadmin = false;
     }
     return user;
 }());

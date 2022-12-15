@@ -12,27 +12,26 @@
         <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="login">
-        <mat-header-cell *matHeaderCellDef>Login</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.login}}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="isadmin">
-        <mat-header-cell *matHeaderCellDef>Admin</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.isAdmin ? '&#10003;' : '&#10005;'}} </mat-cell>
-
-
-      </ng-container>
-
-      <ng-container matColumnDef="creationdate">
+      <ng-container matColumnDef="date">
         <mat-header-cell *matHeaderCellDef>Fecha de creación</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.creationdate | date: "dd-MM-yyyy" }}</mat-cell>
+        <mat-cell *matCellDef="let element">{{element.date | date: "dd-MM-yyyy" }}</mat-cell>
       </ng-container>
+
+      <ng-container matColumnDef="content">
+        <mat-header-cell *matHeaderCellDef>Contenido</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.content | date: "dd-MM-yyyy" }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="author">
+        <mat-header-cell *matHeaderCellDef>Autor</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.author | date: "dd-MM-yyyy" }}</mat-cell>
+      </ng-container>
+
 
       <ng-container matColumnDef="editaction">
         <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button mat-mini-fab class="minifab-no-shadow" (click)="deleteUser(element)" *ngIf="!element.isAdmin">
+          <button mat-mini-fab class="minifab-no-shadow" (click)="deleteDocument(element)" *ngIf="!element.isAdmin">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>
@@ -41,7 +40,7 @@
       <ng-container matColumnDef="deleteaction">
         <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button mat-mini-fab class="minifab-no-shadow" (click)="editUser(element)" *ngIf="!element.isAdmin">
+          <button mat-mini-fab class="minifab-no-shadow" (click)="editDocument(element)" *ngIf="!element.isAdmin">
             <mat-icon>edit</mat-icon>
           </button>
         </mat-cell>
@@ -57,8 +56,8 @@
 
   </div>
   <div class="demo-button-container">
-    <button mat-raised-button (click)="createUser()" class="demo-button">
-      Crear usuario
+    <button mat-raised-button (click)="uploadDocument()" class="demo-button">
+      Subir documento
     </button>
   </div>
 </ng-container>

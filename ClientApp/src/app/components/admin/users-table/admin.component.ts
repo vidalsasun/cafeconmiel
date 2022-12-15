@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { user } from '../../../models/mongo/users';
 import { UsersService } from '../../../services/http/mongo/users/users.service';
+import { UsersFormComponent } from '../users-form/users-form.component';
 
 @Component({
   selector: 'app-admin',
@@ -15,10 +17,13 @@ export class AdminComponent implements OnInit {
   loaded: boolean = false;
 
 
-  constructor(private usersService: UsersService) {
+  constructor(private usersService: UsersService, public dialog: MatDialog) {
     this.users = new Array<user>();
   }
   ngAfterViewInit() {
+    this.getAllUsers();
+  }
+  getAllUsers() {
     this.usersService.getAll().subscribe((result: Array<user>) => {
       if (result) {
         this.users = result;
@@ -42,23 +47,45 @@ export class AdminComponent implements OnInit {
       }
     }, err => {
       console.log(err)
-    });*/   
+    }); */
   }
 
 
-  displayedColumns: string[] = ['id', 'name', 'login', 'isadmin', 'creationdate'];
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'login',
+    'isadmin',
+    'creationdate',
+    'editaction',
+    'deleteaction'
+  ];
 
   @ViewChild(MatTable)
     table!: MatTable<user>;
 
-  addData() {
-    const randomElementIndex = Math.floor(Math.random() * this.users.length);
-    this.dataSource.push(this.users[randomElementIndex]);
-    this.table.renderRows();
+  createUser() {
+    this.dialog.open(UsersFormComponent, {
+      data: null
+    }).afterClosed().subscribe(res => {
+      this.getAllUsers();
+    });
   }
-
-  removeData() {
-    this.dataSource.pop();
-    this.table.renderRows();
+  deleteUser(event: any) {
+    this.usersService.delete(event.id).subscribe((result: user) => {
+      this.getAllUsers();
+    }, err => {
+      console.log(err)
+    });
+  }
+  editUser(event: any) {   
+    this.dialog.open(UsersFormComponent,{      
+      data: event
+    }).afterClosed().subscribe(res => {
+      if (res) {
+        let v = res.user;
+        this.getAllUsers();
+      }
+    });
   }
 }

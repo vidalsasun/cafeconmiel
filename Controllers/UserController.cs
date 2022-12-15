@@ -42,10 +42,10 @@ namespace cafeconmiel.Controllers
 			return CreatedAtAction(nameof(Get), new { id = newUser.id }, newUser);
 		}
 
-		[HttpPut("{id:length(24)}")]
-		public async Task<IActionResult> Update(string id, UserModel updatedUser)
+		[HttpPut]
+		public async Task<ActionResult<UserModel>> Update(UserModel updatedUser)
 		{
-			var user = await _usersService.GetAsync(id);
+			var user = await _usersService.GetAsync(updatedUser.id);
 
 			if (user is null)
 			{
@@ -54,9 +54,9 @@ namespace cafeconmiel.Controllers
 
 			updatedUser.id = user.id;
 
-			await _usersService.UpdateAsync(id, updatedUser);
+			await _usersService.UpdateAsync(updatedUser);
 
-			return NoContent();
+			return updatedUser;
 		}
 
 		[HttpDelete("{id:length(24)}")]

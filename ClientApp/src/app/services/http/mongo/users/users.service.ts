@@ -16,13 +16,19 @@ export class UsersService {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
     })
   }
+  update(model: user): Observable<any> {
+    return this.http.put('/api/users', JSON.stringify(model), {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+    })
+  }
+
   getAll(): Observable<Array<user>> {
     return this.http.get<Array<user>>('/api/users');
   }
   get(parameter: HttpParams): Observable<any> {
     return this.http.get<Array<user>>('/api/users', { params: parameter });
   }
-  delete(userid: user): Observable<any> {
-    return this.http.delete('/api/users/' + userid.id)
+  delete(userid: string): Observable<any> {
+    return this.http.delete('/api/users/' + userid)
   }
 }

@@ -20,13 +20,20 @@
           <li class="nav-item">
             <a class="nav-link text-dark" (click)="setOptionMenu('b')" style="color: #f7d61a !important; cursor: pointer; border: 1px solid #f7d61a; border-radius: 4px; margin: 2px; ">Bibliografía y actividades</a>
           </li>
-          <li class="nav-item" *ngIf="token == ''">
+          <li class="nav-item" *ngIf="!loginredux || loginredux.token == ''">
             <a class="nav-link text-dark" (click)="setOptionMenu('l')" style="color: #f7d61a !important; cursor: pointer; border: 1px solid #f7d61a; border-radius: 4px; margin: 2px; ">Login</a>
           </li>
-          <li class="nav-item" *ngIf="token != ''">
-            <a class="nav-link text-dark" (click)="setOptionMenu('a')" style="color: #f7d61a !important; cursor: pointer; border: 1px solid #f7d61a; border-radius: 4px; margin: 2px; ">Admin</a>
+
+          <li class="nav-item" *ngIf="loginredux && loginredux.token != ''">
+            <a class="nav-link text-dark" (click)="setOptionMenu('d')" style="color: #f7d61a !important; cursor: pointer; border: 1px solid #f7d61a; border-radius: 4px; margin: 2px; ">Documentos</a>
           </li>
-          <li class="nav-item" *ngIf="token != ''">
+
+          <li class="nav-item" *ngIf="loginredux && loginredux.token != '' && loginredux.isAdmin">
+            <a class="nav-link text-dark"
+               (click)="setOptionMenu('a')"
+               style="color: #f7d61a !important; cursor: pointer; border: 1px solid #f7d61a; border-radius: 4px; margin: 2px; ">Admin</a>
+          </li>
+          <li class="nav-item" *ngIf="loginredux && loginredux.token != ''">
             <a class="nav-link text-dark" (click)="closeConnection()" style="color: #f7d61a !important; cursor: pointer; border: 1px solid #f7d61a; border-radius: 4px; margin: 2px; ">Cerrar conexión</a>
           </li>
 
