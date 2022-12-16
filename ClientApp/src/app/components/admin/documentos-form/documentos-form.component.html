@@ -37,11 +37,16 @@
 
     <mat-form-field class="form-element">
       <mat-label>Autor</mat-label>
-      <input matInput             
-             name="author"
-             id="author"
-             formControlName="author"
-             required />
+      <mat-select name="author"
+                  [(ngModel)]="users"
+                  id="author"
+                  formControlName="author"
+                  required>
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let user of users" [value]="user.id">{{user.name}}</mat-option>
+      </mat-select>
+
+
     </mat-form-field>
 
 

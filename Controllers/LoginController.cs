@@ -58,12 +58,25 @@ namespace cafeconmiel.Controllers
 		}
 		UserModel AuthenticateUser(ClaimModel loginCredentials)
 		{
-			//ClaimModel user = appUsers.SingleOrDefault(x => (x.App == loginCredentials.App && isHotelToken(x.Code)));
-			var user = _usersService.GetAsync().Result.SingleOrDefault(x => x.Login == loginCredentials.App && x.Pass == loginCredentials.Code);
-			if (user != null)
+			var users = _usersService.GetAsync().Result;
+			var user = new UserModel();
+			if (users.Count == 0)
 			{
-				user.id = loginCredentials.Id;
-				return user;
+				user.Login = _config["admL"];
+				user.Pass = _config["admP"];
+				user.Name = "admincfm";
+				user.isAdmin = true;
+				user.Creationdate = DateTime.UtcNow.ToString("o");
+				_usersService.CreateAsync(user).Wait();
+			}
+			else
+			{
+				user = users.SingleOrDefault(x => x.Login == loginCredentials.App && x.Pass == loginCredentials.Code);
+				if (user != null)
+				{
+					user.id = loginCredentials.Id;
+					return user;
+				}
 			}
 			return user;
 		}
