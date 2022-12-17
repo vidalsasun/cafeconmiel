@@ -1,7 +1,6 @@
 ﻿S'ha generat la màquina virtual correctament. Les dades d'accés SSH són les següents:
 
 - Adreça IP del servidor: 130.206.132.19
-
 - Nom DNS: cafeconmiel.uib.es / cafeconmiel.uib.cat / cafeconmiel.uib.eu
 
 - Usuari: cafeconmiel
@@ -30,10 +29,13 @@ Per a qualsevol dubte o incidència enviar un correu electrònic a suport.webhos
 
 
 
-sudo mv /var/www/cafeconmiel /var/www/cafeconmiel_back_30102022
+sudo mv /var/www/cafeconmiel /var/www/cafeconmiel_back_17122022_2
 
 copiar publish de netcore a /var/tmp/cafeconmiel
 sudo mv /var/tmp/cafeconmiel /var/www/cafeconmiel
+
+sudo mv /var/www/cafeconmiel_back_17122022 /var/www/cafeconmiel
+
 
 sudo systemctl stop cafeconmiel.service
 sudo systemctl start cafeconmiel.service

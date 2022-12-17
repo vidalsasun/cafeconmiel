@@ -18,11 +18,6 @@ namespace cafeconmiel.Controllers
 		private readonly IWebHostEnvironment _env;
 		
 		private readonly UsersService _usersService;
-		private List<UserModel> appUsers = new List<UserModel>
-		{
-			new UserModel { Login = "admincfm", Pass = "a", isAdmin = true, Name = "admincfm" },
-		};
-
 		public LoginController(IConfiguration config,
 			IJwtAuthenticationService authService,
 			IWebHostEnvironment env,
