@@ -5,7 +5,7 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM node:10.15-alpine AS client 
+FROM node:18.12.1 AS client 
 ARG skip_client_build=false 
 WORKDIR /app 
 COPY JrTech.Angular.Docker/ClientApp . 
@@ -21,9 +21,10 @@ WORKDIR "/src/."
 RUN dotnet build "cafeconmiel.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "cafeconmiel.csproj" -c Release -o /app/publish
+RUN dotnet publish "cafeconmiel.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY --from=client /app/dist /app/dist
 ENTRYPOINT ["dotnet", "cafeconmiel.dll"]
