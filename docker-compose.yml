@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  cafeconmiel:
+    image: ${DOCKER_REGISTRY-}cafeconmiel
+    build:
+      context: .
+      dockerfile: cafeconmiel/Dockerfile
+  cafeconmiel.angular.app:
+    image: ${DOCKER_REGISTRY-}jcafeconmielangularapp
+    build:
+      context: .
+      dockerfile: cafeconmiel/ClientApp/Dockerfile
+    ports:
+      - "4200:4200" 
+      - "44430:44430"
+    volumes:
+      - ./cafeconmiel/ClientApp:/app
