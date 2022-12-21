@@ -7,14 +7,11 @@ namespace cafeconmiel.Models
 	{
 		[BsonId]
 		[BsonRepresentation(BsonType.ObjectId)]
-		public string? id { get; set; }
-
-		public string Name { get; set; } = null!;
-		
+		public string? id { get; set; } = null!;
+		public string Type { get; set; } = null!;
+		public string Name { get; set; } = null!;		
 		public string Date { get; set; } = null!;
-
 		public string Content { get; set; } = null!;
-
 		public string Author { get; set; } = null!;
 	}
 }

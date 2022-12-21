@@ -38,7 +38,6 @@ export class DocumentosComponent implements OnInit {
     });
   }
   displayedColumns: string[] = [
-    'id',
     'name',
     'date',
     'content',

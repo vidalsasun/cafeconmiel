@@ -32,11 +32,11 @@ export class DocumentosFormComponent implements OnInit {
       updateOn: 'change',
     });
     this.form.addControl("id", new FormControl((this.local_data ? this.local_data.id : ''), Validators.required));
+    this.form.addControl("doctype", new FormControl((this.local_data ? this.local_data.type : ''), Validators.required));
     this.form.addControl("name", new FormControl((this.local_data ? this.local_data.name : ''), Validators.required));
     this.form.addControl("content", new FormControl((this.local_data ? this.local_data.content : ''), Validators.required));
     this.form.addControl("author", new FormControl((this.local_data ? this.local_data.author : ''), Validators.required));
   }
-
 
   getAllUsers() {
     this.usersService.getAll().subscribe((result: Array<user>) => {
@@ -50,7 +50,8 @@ export class DocumentosFormComponent implements OnInit {
 
 
   onFormSubmit() {
-      this.documentsService.post({       
+    this.documentsService.post({
+        type: this.form.value.doctype,
         name: this.form.value.name,
         content: this.form.value.content,
         author: this.form.value.author,
@@ -62,5 +63,15 @@ export class DocumentosFormComponent implements OnInit {
       }, err => {
         console.log(err)
       });
+  }
+  docTypeChange(event: any) {
+    if (event.value != "") {
+
+    }
+  }
+  userChange(event: any) {
+    if (event.value != "") {
+
+    }
   }
 }

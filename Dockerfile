@@ -5,13 +5,6 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM node:18.12.1 AS client 
-ARG skip_client_build=false 
-WORKDIR /app 
-COPY JrTech.Angular.Docker/ClientApp . 
-RUN [[ ${skip_client_build} = true ]] && echo "Skipping npm install" || npm install 
-RUN [[ ${skip_client_build} = true ]] && mkdir dist || npm run-script build
-
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["cafeconmiel.csproj", "."]

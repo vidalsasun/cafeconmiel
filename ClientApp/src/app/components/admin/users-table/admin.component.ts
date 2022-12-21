@@ -51,8 +51,7 @@ export class AdminComponent implements OnInit {
   }
 
 
-  displayedColumns: string[] = [
-    'id',
+  displayedColumns: string[] = [  
     'name',
     'login',
     'isadmin',
