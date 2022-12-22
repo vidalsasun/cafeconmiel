@@ -55,7 +55,7 @@ namespace cafeconmiel.Controllers
 
 			await _documentsService.UpdateAsync(id, updatedDocument);
 
-			return NoContent();
+			return CreatedAtAction(nameof(Get), new { id = updatedDocument.id }, updatedDocument);
 		}
 
 		[HttpDelete("{id:length(24)}")]

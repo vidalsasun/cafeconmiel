@@ -16,6 +16,11 @@ export class DocumentsService {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
     })
   }
+  put(model: document): Observable<any> {
+    return this.http.put('/api/documents/' + model.id, JSON.stringify(model), {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+    })
+  }
   getAll(): Observable<Array<document>> {
     return this.http.get<Array<document>>('/api/documents');
   }

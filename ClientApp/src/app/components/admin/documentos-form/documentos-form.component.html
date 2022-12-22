@@ -5,7 +5,7 @@
 
 
   <div style="margin-bottom:14px!important;">
-   
+
     <mat-form-field class="form-element">
       <mat-label>Tipo de documento</mat-label>
       <mat-select name="doctype"
@@ -29,14 +29,20 @@
              required />
     </mat-form-field>
 
-    <mat-form-field class="form-element">
-      <mat-label>Contenido</mat-label>
-      <input matInput
-             name="content"
-             id="content"
-             formControlName="content"
-             required />
-    </mat-form-field>
+
+    <mat-label>Contenido paleologico</mat-label>
+    <angular-editor formControlName="content" [config]="editorConfig"></angular-editor>
+
+
+
+    <!--<mat-form-field class="form-element">
+    <mat-label>Contenido</mat-label>
+    <input matInput
+           name="content"
+           id="content"
+           formControlName="content"
+           required />
+  </mat-form-field>-->
 
     <mat-form-field class="form-element">
       <mat-label>Autor</mat-label>

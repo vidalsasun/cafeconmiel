@@ -41,6 +41,8 @@ import { environment } from '../environments/environment';
 import { DocumentosComponent } from './components/admin/documentos/documentos.component';
 import { DocumentosFormComponent } from './components/admin/documentos-form/documentos-form.component';
 
+import { AngularEditorModule } from '@kolkov/angular-editor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,6 +71,7 @@ import { DocumentosFormComponent } from './components/admin/documentos-form/docu
     MatInputModule,
     MatPaginatorModule,
     MatDialogModule,
+    HttpClientModule, AngularEditorModule,
     MatMenuModule,
     FormsModule,
     MatSelectModule,
