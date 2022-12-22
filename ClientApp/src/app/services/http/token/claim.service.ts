@@ -2,7 +2,6 @@ import { Inject, Injectable } from '@angular/core';
 import { UserClaimsModel } from '../../../models/token/UserClaimsModel';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { reduxLoginModel } from '../../../models/redux/login';
 
 @Injectable({
   providedIn: 'root'

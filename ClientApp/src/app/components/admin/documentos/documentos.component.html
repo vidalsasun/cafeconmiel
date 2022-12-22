@@ -2,26 +2,49 @@
   <div class="flexbox">
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
+      <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef>Tipo de fichero</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.type}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="transcriptor">
+        <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.transcriptor}}</mat-cell>
+      </ng-container>
 
       <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
       </ng-container>
 
-
-      <ng-container matColumnDef="content">
-        <mat-header-cell *matHeaderCellDef>Contenido</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.content }}</mat-cell>
+      <ng-container matColumnDef="grupo">
+        <mat-header-cell *matHeaderCellDef>Grupo</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.grupo}}</mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="author">
-        <mat-header-cell *matHeaderCellDef>Autor</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.author }}</mat-cell>
+      <ng-container matColumnDef="corpus">
+        <mat-header-cell *matHeaderCellDef>Corpus</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.corpus}}</mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="date">
+      <ng-container matColumnDef="lugar">
+        <mat-header-cell *matHeaderCellDef>Lugar</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.lugar}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="soporte">
+        <mat-header-cell *matHeaderCellDef>Soporte</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.soporte}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="estado">
+        <mat-header-cell *matHeaderCellDef>estado</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.estado}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="creationDate">
         <mat-header-cell *matHeaderCellDef>Fecha de creación</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.date }}</mat-cell>
+        <mat-cell *matCellDef="let element">{{element.creationDate | date: "dd-MM-yyyy"}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="editaction">
@@ -52,7 +75,7 @@
 
   </div>
   <div class="demo-button-container">
-    <button mat-raised-button (click)="uploadDocument()" class="demo-button">
+    <button mat-flat-button (click)="uploadDocument()" color="primary">
       Subir documento
     </button>
   </div>

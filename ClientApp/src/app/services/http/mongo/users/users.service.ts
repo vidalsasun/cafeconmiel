@@ -26,7 +26,7 @@ export class UsersService {
     return this.http.get<Array<user>>('/api/users');
   }
   get(parameter: HttpParams): Observable<any> {
-    return this.http.get<Array<user>>('/api/users', { params: parameter });
+    return this.http.get<user>('/api/users', { params: parameter });
   }
   delete(userid: string): Observable<any> {
     return this.http.delete('/api/users/' + userid)

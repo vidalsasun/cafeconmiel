@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\components\admin\documentos-form\documentos-form.component-vars.ts" />
     <None Remove="ClientApp\src\app\models\mongo\documents.ts" />
     <None Remove="ClientApp\src\app\models\mongo\users.ts" />
     <None Remove="ClientApp\src\app\models\redux\login.ts" />
@@ -42,6 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\components\admin\documentos-form\documentos-form.component-vars.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\mongo\documents.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\mongo\users.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\redux\login.ts" />

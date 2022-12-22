@@ -27,6 +27,9 @@ namespace cafeconmiel.Services
 		public async Task<DocumentModel?> GetAsync(string id) =>
 			await _DocumentsCollection.Find(x => x.id == id).FirstOrDefaultAsync();
 
+		public async Task<DocumentModel?> GetByUserAsync(string user) =>
+			await _DocumentsCollection.Find(x => x.Transcriptor == user).FirstOrDefaultAsync();
+
 		public async Task CreateAsync(DocumentModel newDocument) =>
 			await _DocumentsCollection.InsertOneAsync(newDocument);
 

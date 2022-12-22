@@ -3,25 +3,41 @@
   flex: 0 0 100%;
 }
 
-.mat-column-id {
+.mat-column-doctype {
+  flex: 0 0 10%;
+}
+.mat-column-transcriptor {
   flex: 0 0 10%;
 }
 
 .mat-column-name {
-  flex: 0 0 25%;
+  flex: 0 0 10%;
+}
+
+.mat-column-grupo {
+  flex: 0 0 10%;
+}
+
+.mat-column-corpus {
+  flex: 0 0 5%;
+}
+
+.mat-column-lugar {
+  flex: 0 0 10%;
+}
+
+.mat-column-soporte {
+  flex: 0 0 10%;
+}
+
+.mat-column-estado {
+  flex: 0 0 15%;
 }
 
 .mat-column-date {
   flex: 0 0 10%;
 }
 
-.mat-column-content {
-  flex: 0 0 30%;
-}
-
-.mat-column-author {
-  flex: 0 0 15%;
-}
 
 .mat-column-editaction {
   flex: 0 0 5%;

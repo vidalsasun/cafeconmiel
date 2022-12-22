@@ -1,4 +1,5 @@
 export class reduxLoginModel {
-  token: string | undefined;
+  token?: string;
+  userId?: string;
   isAdmin: boolean = false;
 } 

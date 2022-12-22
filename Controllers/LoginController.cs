@@ -41,6 +41,7 @@ namespace cafeconmiel.Controllers
 				ReduxLoginModel rModel = new ReduxLoginModel()
 				{
 					isAdmin = user.isAdmin,
+					userId = user.id,
 					token = tokenString
 				};
 
@@ -69,7 +70,7 @@ namespace cafeconmiel.Controllers
 				user = users.SingleOrDefault(x => x.Login == loginCredentials.App && x.Pass == loginCredentials.Code);
 				if (user != null)
 				{
-					user.id = loginCredentials.Id;
+					//user.id = loginCredentials.Id;
 					return user;
 				}
 			}

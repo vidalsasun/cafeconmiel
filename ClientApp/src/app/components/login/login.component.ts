@@ -46,6 +46,8 @@ export class LoginComponent implements OnInit {
         //this.tokenService.setToken(r.token);
         this.loginredux.token = r.rModel.token;
         this.loginredux.isAdmin = r.rModel.isAdmin;
+        this.loginredux.userId = r.rModel.userId;
+
         this.store.dispatch(LoginActions.loginUser({ loginData: this.loginredux }));
         this.menuService.setMenu('p');
         this.dialogRef.close();

@@ -1,8 +1,13 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { Store } from '@ngrx/store';
 import { document } from '../../../models/mongo/documents';
+import { reduxLoginModel } from '../../../models/redux/login';
 import { DocumentsService } from '../../../services/http/mongo/documents/documents.service';
+import { UsersService } from '../../../services/http/mongo/users/users.service';
+import { LoginSelectors } from '../../../store/login';
 import { DocumentosFormComponent } from '../documentos-form/documentos-form.component';
 
 @Component({
@@ -15,13 +20,21 @@ export class DocumentosComponent implements OnInit {
   documents!: Array<document>;
   dataSource!: Array<document>;
   loaded: boolean = false;
+  loginredux!: reduxLoginModel;
 
   constructor(private documentsService: DocumentsService,
+    private usersService: UsersService,
+    private store: Store,
     public dialog: MatDialog) {
     this.documents = new Array<document>();
   }
 
   ngOnInit(): void {
+    this.store.select(LoginSelectors.token).subscribe(result => {
+      this.loginredux = result[0] as reduxLoginModel;
+    }, err => {
+      console.log(err.error);
+    });
   }
   ngAfterViewInit() {
     this.getAllDocuments();
@@ -29,7 +42,12 @@ export class DocumentosComponent implements OnInit {
   getAllDocuments() {
     this.documentsService.getAll().subscribe((result: Array<document>) => {
       if (result) {
-        this.documents = result;
+        if (this.loginredux.isAdmin) {
+          this.documents = result;
+        }
+        else {
+          this.documents = result.filter(x => x.transcriptor = this.loginredux.userId);
+        }
         this.dataSource = [...this.documents];
         this.loaded = true;
       }
@@ -38,10 +56,15 @@ export class DocumentosComponent implements OnInit {
     });
   }
   displayedColumns: string[] = [
+    'type',
+    'transcriptor',
     'name',
-    'date',
-    'content',
-    'author',
+    'grupo',
+    'corpus',
+    'lugar',
+    'soporte',
+    'estado',
+    'creationDate',
     'editaction',
     'deleteaction'
   ];
@@ -51,7 +74,9 @@ export class DocumentosComponent implements OnInit {
 
   uploadDocument() {
     this.dialog.open(DocumentosFormComponent, {
-      data: null
+      data: null,
+      autoFocus: false,
+      maxHeight: '90vh'
     }).afterClosed().subscribe(res => {
       this.getAllDocuments();
     });
@@ -65,12 +90,14 @@ export class DocumentosComponent implements OnInit {
   }
   editDocument(event: any) {   
     this.dialog.open(DocumentosFormComponent,{      
-      data: event
+      data: event,
+      autoFocus: false,
+      maxHeight: '90vh'
     }).afterClosed().subscribe(res => {
       if (res) {
         let v = res.user;
         this.getAllDocuments();
       }
     });
-  }
+  }  
 }

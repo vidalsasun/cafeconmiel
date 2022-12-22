@@ -4,62 +4,263 @@
       style="margin-top: 15px !important">
 
 
-  <div style="margin-bottom:14px!important;">
-
-    <mat-form-field class="form-element">
-      <mat-label>Tipo de documento</mat-label>
-      <mat-select name="doctype"
-                  id="doctype"
-                  formControlName="doctype"
-                  required
-                  (selectionChange)="docTypeChange($event)">
-        <mat-option>None</mat-option>
-        <mat-option value="historical">Documento histórico</mat-option>
-        <mat-option value="interview">Entrevista</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-
-    <mat-form-field class="form-element">
-      <mat-label>Nombre</mat-label>
-      <input matInput
-             name="name"
-             id="name"
-             formControlName="name"
-             required />
-    </mat-form-field>
+  <div style="margin-bottom: 14px !important; margin: 12px 0;">
+    <div class="flex-form-fields">
+      <mat-form-field class="form-element">
+        <mat-label>Tipo de documento</mat-label>
+        <mat-select name="type"
+                    id="type"
+                    formControlName="type"
+                    required
+                    (selectionChange)="docTypeChange($event)">
+          <mat-option>None</mat-option>
+          <mat-option value="historical">Documento histórico</mat-option>
+          <mat-option value="interview">Entrevista</mat-option>
+        </mat-select>
+      </mat-form-field>
 
 
-    <mat-label>Contenido paleologico</mat-label>
-    <angular-editor formControlName="content" [config]="editorConfig"></angular-editor>
+      <mat-form-field class="form-element">
+        <mat-label>Nombre</mat-label>
+        <input matInput
+               name="name"
+               id="name"
+               formControlName="name"
+               required />
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <mat-label>Grupo</mat-label>
+        <input matInput
+               name="grupo"
+               id="grupo"
+               formControlName="grupo"
+               required />
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <mat-label>Corpus</mat-label>
+        <input matInput
+               name="corpus"
+               id="corpus"
+               formControlName="corpus"
+               required />
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <mat-label>Archivo</mat-label>
+        <input matInput
+               name="archivo"
+               id="archivo"
+               formControlName="archivo"
+               required />
+      </mat-form-field>
+    </div>
+    <div class="flex-form-fields">
+      <mat-form-field class="form-element">
+        <mat-label>Signatura</mat-label>
+        <input matInput
+               name="signatura"
+               id="signatura"
+               formControlName="signatura"
+               required />
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <mat-label>Folios</mat-label>
+        <input matInput
+               name="folios"
+               id="folios"
+               formControlName="folios"
+               required />
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <mat-label>Año</mat-label>
+        <input matInput
+               name="anyo"
+               id="anyo"
+               formControlName="anyo"
+               required />
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <mat-label>Mes</mat-label>
+        <input matInput
+               name="mes"
+               id="mes"
+               formControlName="mes"
+               required />
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <mat-label>Día</mat-label>
+        <input matInput
+               name="dia"
+               id="dia"
+               formControlName="dia"
+               required />
+      </mat-form-field>
+    </div>
+    <div class="flex-form-fields">
+
+      <mat-form-field class="form-element">
+        <mat-label>Lugar</mat-label>
+        <input matInput
+               name="lugar"
+               id="lugar"
+               formControlName="lugar"
+               required />
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <mat-label>Provincia</mat-label>
+        <input matInput
+               name="provincia"
+               id="provincia"
+               formControlName="provincia"
+               required />
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <mat-label>País</mat-label>
+        <input matInput
+               name="pais"
+               id="pais"
+               formControlName="pais"
+               required />
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <mat-label>Regesto</mat-label>
+        <input matInput
+               name="regesto"
+               id="regesto"
+               formControlName="regesto"
+               required />
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <mat-label>Tipo Documento</mat-label>
+        <input matInput
+               name="tipoDocumental"
+               id="tipoDocumental"
+               formControlName="tipoDocumental"
+               required />
+      </mat-form-field>
+    </div>
+    <div class="flex-form-fields">
+
+      <mat-form-field class="form-element">
+        <mat-label>Copista</mat-label>
+        <input matInput
+               name="copista"
+               id="copista"
+               formControlName="copista"
+               required />
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <mat-label>Firma</mat-label>
+        <input matInput
+               name="firma"
+               id="firma"
+               formControlName="firma"
+               required />
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <mat-label>Soporte</mat-label>
+        <input matInput
+               name="soporte"
+               id="soporte"
+               formControlName="soporte"
+               required />
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <mat-label>Estado</mat-label>
+        <input matInput
+               name="estado"
+               id="estado"
+               formControlName="estado"
+               required />
+      </mat-form-field>
+
+
+      <mat-form-field class="form-element">
+        <mat-label>Transcriptor</mat-label>
+        <mat-select name="transcriptor"
+                    id="transcriptor"
+                    formControlName="transcriptor"
+                    required
+                    [(ngModel)]="defaultUser"
+                    (selectionChange)="userChange($event)">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let user of users" [value]="user.id">{{user.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="flex-form-fields">
+
+      <mat-form-field class="form-element">
+        <mat-label>Primer revisor</mat-label>
+        <input matInput
+               name="primerRevisor"
+               id="primerRevisor"
+               formControlName="primerRevisor"
+               required />
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <mat-label>Segundo revisor</mat-label>
+        <input matInput
+               name="segundoRevisor"
+               id="segundoRevisor"
+               formControlName="segundoRevisor"
+               required />
+      </mat-form-field>
+    </div>
+
+    <div class="flex-form-fields">
+      <mat-form-field class="form-element">
+        <div>
+          <mat-toolbar>
+            <input matInput
+                   [(ngModel)]="fileAttr"
+                   readonly
+                   id="filename"
+                   formControlName="filename"
+                   name="filename" />
+            <button mat-flat-button color="primary">Cargar Audio</button>
+          </mat-toolbar>
+          <input type="file"
+                 #fileInput
+                 id="uploadFile"
+                 (change)="uploadFileEvt($event)"
+                 name="uploadFile"
+                 formControlName="uploadFile"
+                 multiple="multiple"
+                 accept="image/*" />
+        </div>
+      </mat-form-field>
+    </div>
 
 
 
-    <!--<mat-form-field class="form-element">
-    <mat-label>Contenido</mat-label>
-    <input matInput
-           name="content"
-           id="content"
-           formControlName="content"
-           required />
-  </mat-form-field>-->
 
-    <mat-form-field class="form-element">
-      <mat-label>Autor</mat-label>
-      <mat-select name="author"
-                  id="author"
-                  formControlName="author"
-                  required
-                  (selectionChange)="userChange($event)">
-        <mat-option>None</mat-option>
-        <mat-option *ngFor="let user of users" [value]="user.id">{{user.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-label>Texto paleográfico</mat-label>
+      <angular-editor formControlName="textopaleografico" [config]="editorConfig"></angular-editor>
+
+      <mat-label>Texto crítico</mat-label>
+      <angular-editor formControlName="textocritico" [config]="editorConfig"></angular-editor>
 
 
-  </div>
-  <button mat-button type="submit" color="primary">
-    Aceptar
-  </button>
+
+
+    </div>
+    <button mat-flat-button type="submit" color="primary">
+      Aceptar
+    </button>
 
 </form>
