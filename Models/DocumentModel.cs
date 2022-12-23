@@ -30,9 +30,11 @@ namespace cafeconmiel.Models
 		public string Transcriptor { get; set; } = null!;
 		public string PrimerRevisor { get; set; } = null!;
 		public string SegundoRevisor { get; set; } = null!;
-		public string CreationDate { get; set; } = null!;
 		public string Textopaleografico { get; set; } = null!;
 		public string Textocritico { get; set; } = null!;
+		public string Audiofile { get; set; } = null!;
+		public string AudiofileName { get; set; } = null!;
+		public string CreationDate { get; set; } = null!;
 	}
 
 }

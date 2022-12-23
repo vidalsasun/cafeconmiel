@@ -222,17 +222,17 @@
       </mat-form-field>
     </div>
 
-    <div class="flex-form-fields">
+    <div class="flex-form-fields-audio">
       <mat-form-field class="form-element">
         <div>
           <mat-toolbar>
             <input matInput
-                   [(ngModel)]="fileAttr"
+                   [(ngModel)]="audioBase64Name"
                    readonly
                    id="filename"
                    formControlName="filename"
                    name="filename" />
-            <button mat-flat-button color="primary">Cargar Audio</button>
+            <button mat-raised-button color="primary" style="min-width: -1px !important;">Audio</button>
           </mat-toolbar>
           <input type="file"
                  #fileInput
@@ -240,26 +240,27 @@
                  (change)="uploadFileEvt($event)"
                  name="uploadFile"
                  formControlName="uploadFile"
-                 multiple="multiple"
-                 accept="image/*" />
+                 accept="audio/mp3,audio/*;capture=microphone" />
         </div>
       </mat-form-field>
     </div>
+    <div class="flex-form-fields-audio">
+      <audio controls [src]="audioBase64 | safe:'url'"></audio>
+    </div>
 
-
-
-
-      <mat-label>Texto paleográfico</mat-label>
+    <div style="margin-top:15px;">
+      <mat-label class="h5">Texto paleográfico</mat-label>
       <angular-editor formControlName="textopaleografico" [config]="editorConfig"></angular-editor>
-
+    </div>
+    <div style="margin-top:15px;">
       <mat-label>Texto crítico</mat-label>
       <angular-editor formControlName="textocritico" [config]="editorConfig"></angular-editor>
-
+    </div>
 
 
 
     </div>
-    <button mat-flat-button type="submit" color="primary">
+    <button mat-raised-button type="submit" color="primary">
       Aceptar
     </button>
 

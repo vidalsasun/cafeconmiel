@@ -10,6 +10,7 @@ import { DocumentosFormComponentVars } from './documentos-form.component-vars';
 import { Store } from '@ngrx/store';
 import { LoginSelectors } from '../../../store/login';
 import { reduxLoginModel } from '../../../models/redux/login';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-documentos-form',
@@ -19,29 +20,10 @@ import { reduxLoginModel } from '../../../models/redux/login';
 export class DocumentosFormComponent implements OnInit {
 
   @ViewChild('fileInput') fileInput!: ElementRef;
-  fileAttr = 'Choose File';
-  uploadFileEvt(imgFile: any) {
-    if (imgFile.target.files && imgFile.target.files[0]) {
-      this.fileAttr = '';
-      Array.from(imgFile.target.files).forEach((file: any) => {
-        this.fileAttr += file.name + ' - ';
-      });
-      // HTML5 FileReader API
-      let reader = new FileReader();
-      reader.onload = (e: any) => {
-        let image = new Image();
-        image.src = e.target.result;
-        image.onload = (rs) => {
-          let imgBase64Path = e.target.result;
-        };
-      };
-      reader.readAsDataURL(imgFile.target.files[0]);
-      // Reset if duplicate image uploaded again
-      this.fileInput.nativeElement.value = '';
-    } else {
-      this.fileAttr = 'Choose File';
-    }
-  }
+  fileAttr = 'Seleccionar fichero';
+  audioBase64: string = '';
+  audioBase64Name: string = '';
+  audioBlob!: Blob;  
 
   editorConfig!: AngularEditorConfig;
   local_data: document;
@@ -53,14 +35,20 @@ export class DocumentosFormComponent implements OnInit {
   constructor(private documentsService: DocumentsService,
     private usersService: UsersService,
     private builder: FormBuilder,
+    private domSanitizer: DomSanitizer,
     private localVars: DocumentosFormComponentVars,
     public dialogRef: MatDialogRef<DocumentosFormComponent>,
     private store: Store,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: document) {
-    this.local_data = { ...data };
-    this.users = new Array<user>();
-    this.editorConfig =  this.localVars.editorConfig
-  }
+      this.local_data = { ...data };
+    this.audioBase64 = this.local_data.audiofile;
+    this.audioBase64Name = this.local_data.audiofileName;
+    if (this.audioBase64) {
+      this.audioBlob = this.convertBase64ToBlob(this.audioBase64);
+    }
+      this.users = new Array<user>();
+      this.editorConfig =  this.localVars.editorConfig
+    }
 
   ngOnInit(): void {
 
@@ -97,8 +85,8 @@ export class DocumentosFormComponent implements OnInit {
     this.form.addControl("transcriptor", new FormControl((this.local_data ? this.local_data.transcriptor : ''), Validators.required));
     this.form.addControl("primerRevisor", new FormControl((this.local_data ? this.local_data.primerRevisor : ''), Validators.required));
     this.form.addControl("segundoRevisor", new FormControl((this.local_data ? this.local_data.segundoRevisor : ''), Validators.required));
-    this.form.addControl("filename", new FormControl((this.local_data ? this.local_data.segundoRevisor : ''), Validators.required));
-    this.form.addControl("uploadFile", new FormControl((this.local_data ? this.local_data.segundoRevisor : ''), Validators.required));
+    this.form.addControl("filename", new FormControl());
+    this.form.addControl("uploadFile", new FormControl());
     this.form.addControl("textopaleografico", new FormControl((this.local_data ? this.local_data.textopaleografico : ''), Validators.required));
     this.form.addControl("textocritico", new FormControl((this.local_data ? this.local_data.textocritico : ''), Validators.required));
 
@@ -117,16 +105,11 @@ export class DocumentosFormComponent implements OnInit {
         else {
           this.defaultUser = this.local_data.transcriptor;
         }
-
-        
-
       }
     }, err => {
       console.log(err)
     });
   }
-
-
   onFormSubmit() {
     if (!this.data) {
       this.documentsService.post({
@@ -154,6 +137,8 @@ export class DocumentosFormComponent implements OnInit {
         segundoRevisor: this.form.value.segundoRevisor,
         textopaleografico: this.form.value.textopaleografico,
         textocritico: this.form.value.textocritico,
+        audiofile: this.audioBase64,
+        audiofileName: this.audioBase64Name,
         creationdate: new Date()
       }).subscribe((result: document) => {
         if (result) {
@@ -190,6 +175,8 @@ export class DocumentosFormComponent implements OnInit {
         segundoRevisor: this.form.value.segundoRevisor,
         textopaleografico: this.form.value.textopaleografico,
         textocritico: this.form.value.textocritico,
+        audiofile: this.audioBase64,
+        audiofileName: this.audioBase64Name,
         creationdate: new Date()
       }).subscribe((result: document) => {
         if (result) {
@@ -210,5 +197,49 @@ export class DocumentosFormComponent implements OnInit {
     if (event.value != "") {
 
     }
+  }
+  uploadFileEvt(imgFile: any) {
+    if (imgFile.target.files && imgFile.target.files[0]) {
+      this.audioBase64Name = '';
+      Array.from(imgFile.target.files).forEach((file: any) => {
+        this.audioBase64Name += file.name;
+      });
+      // HTML5 FileReader API
+      let reader = new FileReader();
+        reader.onload = (e: any) => {
+        this.audioBase64 = e.target.result;
+
+        if (this.audioBase64) {
+          this.audioBlob = this.convertBase64ToBlob(this.audioBase64);
+        }
+      };
+      reader.readAsDataURL(imgFile.target.files[0]);
+      // Reset if duplicate image uploaded again
+      this.fileInput.nativeElement.value = '';
+    } else {
+      this.audioBase64Name = 'Selecciona fichero de audio';
+    }
+  }
+  private convertBase64ToBlob(base64Audio: string) {
+
+    // Split into two parts
+    const parts = base64Audio.split(';base64,');
+
+    // Hold the content type
+    const audioType = parts[0].split(':')[1];
+
+    // Decode Base64 string
+    const decodedData = window.atob(parts[1]);
+
+    // Create UNIT8ARRAY of size same as row data length
+    const uInt8Array = new Uint8Array(decodedData.length);
+
+    // Insert all character code into uInt8Array
+    for (let i = 0; i < decodedData.length; ++i) {
+      uInt8Array[i] = decodedData.charCodeAt(i);
+    }
+
+    // Return BLOB image after conversion
+    return new Blob([uInt8Array], { type: audioType });
   }
 }

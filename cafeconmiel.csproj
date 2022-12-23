@@ -34,6 +34,7 @@
     <None Remove="ClientApp\src\app\models\mongo\documents.ts" />
     <None Remove="ClientApp\src\app\models\mongo\users.ts" />
     <None Remove="ClientApp\src\app\models\redux\login.ts" />
+    <None Remove="ClientApp\src\app\pipes\safe.pipe.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +48,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\models\mongo\documents.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\mongo\users.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\redux\login.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\pipes\safe.pipe.ts" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -7,7 +7,7 @@
   flex: 0 0 10%;
 }
 .mat-column-transcriptor {
-  flex: 0 0 10%;
+  flex: 0 0 15%;
 }
 
 .mat-column-name {
@@ -27,7 +27,7 @@
 }
 
 .mat-column-soporte {
-  flex: 0 0 10%;
+  flex: 0 0 5%;
 }
 
 .mat-column-estado {

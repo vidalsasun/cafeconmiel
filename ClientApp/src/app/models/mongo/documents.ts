@@ -24,5 +24,7 @@ export class document {
   segundoRevisor: string = '';
   textopaleografico: string = '';
   textocritico: string = '';
+  audiofile: string = '';
+  audiofileName: string = '';
   creationdate!: Date;
 }

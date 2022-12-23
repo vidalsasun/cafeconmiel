@@ -8,7 +8,7 @@
       </ng-container>
 
       <ng-container matColumnDef="transcriptor">
-        <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Transcriptor</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.transcriptor}}</mat-cell>
       </ng-container>
 
@@ -75,7 +75,7 @@
 
   </div>
   <div class="demo-button-container">
-    <button mat-flat-button (click)="uploadDocument()" color="primary">
+    <button mat-raised-button (click)="uploadDocument()" color="primary">
       Subir documento
     </button>
   </div>

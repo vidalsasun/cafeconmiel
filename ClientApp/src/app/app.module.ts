@@ -42,6 +42,7 @@ import { DocumentosComponent } from './components/admin/documentos/documentos.co
 import { DocumentosFormComponent } from './components/admin/documentos-form/documentos-form.component';
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { SafePipe } from './pipes/safe.pipe'
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     ContentComponent,
     FooterComponent,
     DocumentosComponent,
-    DocumentosFormComponent
+    DocumentosFormComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
