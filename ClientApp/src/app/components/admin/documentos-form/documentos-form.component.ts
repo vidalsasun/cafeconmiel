@@ -99,7 +99,7 @@ export class DocumentosFormComponent implements OnInit {
       if (result) {
         this.users = result;
 
-        if (!this.data) {
+        if (this.data == null) {
           this.defaultUser = this.users.filter(x => x.id == this.loginredux!.userId)!.shift()?.id;
         }
         else {

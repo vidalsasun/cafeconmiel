@@ -20,6 +20,7 @@ export class document {
   soporte: string = '';
   estado: string = '';
   transcriptor?: string = '';
+  transcriptorName?: string = '';
   primerRevisor: string = '';
   segundoRevisor: string = '';
   textopaleografico: string = '';

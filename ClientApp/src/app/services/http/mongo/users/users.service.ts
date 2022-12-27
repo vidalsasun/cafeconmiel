@@ -25,8 +25,8 @@ export class UsersService {
   getAll(): Observable<Array<user>> {
     return this.http.get<Array<user>>('/api/users');
   }
-  get(parameter: HttpParams): Observable<any> {
-    return this.http.get<user>('/api/users', { params: parameter });
+  get(userId: string): Observable<any> {
+    return this.http.get<user>('/api/users/' + userId);
   }
   delete(userid: string): Observable<any> {
     return this.http.delete('/api/users/' + userid)

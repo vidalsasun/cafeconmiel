@@ -3,7 +3,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { Store } from '@ngrx/store';
+import { User } from 'oidc-client';
 import { document } from '../../../models/mongo/documents';
+import { user } from '../../../models/mongo/users';
 import { reduxLoginModel } from '../../../models/redux/login';
 import { DocumentsService } from '../../../services/http/mongo/documents/documents.service';
 import { UsersService } from '../../../services/http/mongo/users/users.service';
@@ -46,8 +48,19 @@ export class DocumentosComponent implements OnInit {
           this.documents = result;
         }
         else {
-          this.documents = result.filter(x => x.transcriptor = this.loginredux.userId);
+          this.documents = result.filter(x => x.transcriptor == this.loginredux.userId);
         }
+
+        this.documents.forEach((value, key) => {
+          if (value.transcriptor != null) {
+            this.usersService.get(value.transcriptor!).subscribe((result: user) => {
+              if (result) {
+                value.transcriptorName = result.name;
+              }
+            });
+          }
+        });
+
         this.dataSource = [...this.documents];
         this.loaded = true;
       }
@@ -57,7 +70,7 @@ export class DocumentosComponent implements OnInit {
   }
   displayedColumns: string[] = [
     'type',
-    'transcriptor',
+    'transcriptorName',
     'name',
     'grupo',
     'corpus',
