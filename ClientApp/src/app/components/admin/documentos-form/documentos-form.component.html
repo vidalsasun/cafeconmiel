@@ -222,6 +222,31 @@
       </mat-form-field>
     </div>
 
+  
+    <div class="clearfix">
+      <mat-label class="h5" style="margin-top:10px;margin-bottom:10px">Imágenes</mat-label>
+      <nz-upload nzListType="picture-card"
+                 [(nzFileList)]="filesNGZorro"
+                 [nzBeforeUpload]="beforeUpload"
+                 [nzShowButton]="filesNGZorro.length < 2"
+                 [nzPreview]="handlePreview">
+        <div>
+          <span nz-icon nzType="plus"></span>
+          <div style="margin-top: 8px">Subir imágen</div>
+        </div>
+      </nz-upload>
+      <nz-modal [nzVisible]="previewVisible"
+                [nzContent]="modalContent"
+                [nzFooter]="null"
+                (nzOnCancel)="previewVisible = false">
+        <ng-template #modalContent>
+          <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+        </ng-template>
+      </nz-modal>
+    </div>
+
+
+
     <mat-label class="h5" style="margin-top:10px;margin-bottom:10px">Archivo de Audio</mat-label>
     <div class="flex-form-fields-audio">
       <mat-form-field class="form-element">

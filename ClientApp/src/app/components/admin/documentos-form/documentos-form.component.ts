@@ -11,6 +11,18 @@ import { Store } from '@ngrx/store';
 import { LoginSelectors } from '../../../store/login';
 import { reduxLoginModel } from '../../../models/redux/login';
 import { DomSanitizer } from '@angular/platform-browser';
+import { file } from '../../../models/mongo/files';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { FilesService } from '../../../services/http/mongo/files/files.service';
+import { HttpParams } from '@angular/common/http';
+
+const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
 
 @Component({
   selector: 'app-documentos-form',
@@ -23,7 +35,7 @@ export class DocumentosFormComponent implements OnInit {
   fileAttr = 'Seleccionar fichero';
   audioBase64: string = '';
   audioBase64Name: string = '';
-  audioBlob!: Blob;  
+  //audioBlob!: Blob;  
 
   editorConfig!: AngularEditorConfig;
   local_data: document;
@@ -32,8 +44,12 @@ export class DocumentosFormComponent implements OnInit {
   loginredux!: reduxLoginModel;
   defaultUser?: string;
 
+  public files!: file[];
+  public filesNGZorro!: NzUploadFile[];
+
   constructor(private documentsService: DocumentsService,
     private usersService: UsersService,
+    private filesService: FilesService,
     private builder: FormBuilder,
     private domSanitizer: DomSanitizer,
     private localVars: DocumentosFormComponentVars,
@@ -41,11 +57,16 @@ export class DocumentosFormComponent implements OnInit {
     private store: Store,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: document) {
       this.local_data = { ...data };
-    this.audioBase64 = this.local_data.audiofile;
-    this.audioBase64Name = this.local_data.audiofileName;
-    if (this.audioBase64) {
-      this.audioBlob = this.convertBase64ToBlob(this.audioBase64);
-    }
+      this.audioBase64 = this.local_data.audiofile;
+      this.audioBase64Name = this.local_data.audiofileName;
+
+      this.files = new Array<file>();
+      this.filesNGZorro = new Array<NzUploadFile>();
+
+
+      /*if (this.audioBase64) {
+        this.audioBlob = this.convertBase64ToBlob(this.audioBase64);
+      }*/
       this.users = new Array<user>();
       this.editorConfig =  this.localVars.editorConfig
     }
@@ -90,7 +111,23 @@ export class DocumentosFormComponent implements OnInit {
     this.form.addControl("textopaleografico", new FormControl((this.local_data ? this.local_data.textopaleografico : ''), Validators.required));
     this.form.addControl("textocritico", new FormControl((this.local_data ? this.local_data.textocritico : ''), Validators.required));
 
+    this.filesService.get(this.data.id!).subscribe((result: Array<file>) => {
+      if (result) {
 
+        result.forEach((value, key) => {
+
+          let ngz: NzUploadFile = {
+            uid: value.id ? value.id : '',
+            name: value.fileName,
+            url: value.fileData ? "data:image/" + value.extension.toLowerCase().replace('.', '') + ";base64," + value.fileData : ''
+          };
+          this.filesNGZorro.concat(ngz);
+
+        });        
+      }
+    }, err => {
+      console.log(err)
+    });
 
   }
 
@@ -142,6 +179,19 @@ export class DocumentosFormComponent implements OnInit {
         creationdate: new Date()
       }).subscribe((result: document) => {
         if (result) {
+
+          if (this.files.length > 0) {
+            this.files.forEach((file: file) => {
+              this.filesService.post(file).subscribe((result: document) => {
+                if (result) {
+                  this.dialogRef.close(result);
+                }
+              }, err => {
+                console.log(err)
+              });
+            });            
+          }
+
           this.dialogRef.close(result);
         }
       }, err => {
@@ -180,6 +230,19 @@ export class DocumentosFormComponent implements OnInit {
         creationdate: new Date()
       }).subscribe((result: document) => {
         if (result) {
+
+          if (this.files.length > 0) {
+            this.files.forEach((file: file) => {
+              this.filesService.post(file).subscribe((result: file) => {
+                if (result) {
+                  this.dialogRef.close(result);
+                }
+              }, err => {
+                console.log(err)
+              });
+            });
+          }
+
           this.dialogRef.close(result);
         }
       }, err => {
@@ -209,9 +272,9 @@ export class DocumentosFormComponent implements OnInit {
         reader.onload = (e: any) => {
         this.audioBase64 = e.target.result;
 
-        if (this.audioBase64) {
+        /*if (this.audioBase64) {
           this.audioBlob = this.convertBase64ToBlob(this.audioBase64);
-        }
+        }*/
       };
       reader.readAsDataURL(imgFile.target.files[0]);
       // Reset if duplicate image uploaded again
@@ -220,6 +283,48 @@ export class DocumentosFormComponent implements OnInit {
       this.audioBase64Name = 'Selecciona fichero de audio';
     }
   }
+  
+  beforeUpload = (file: NzUploadFile): boolean => {
+    this.filesNGZorro = this.filesNGZorro.concat(file);
+    const myReader = new FileReader();
+    let filebase64 = ''; 
+
+    myReader.readAsDataURL(file as any);
+    myReader.onloadend = (e) => {
+      filebase64 = myReader.result!.toString();
+      const extReg = /(?:\.([^.]+))?$/;
+      this.files.push({
+        documentid: this.data.id!,
+        extension: extReg.exec(file.name!)![1],
+        fileData: filebase64,
+        fileName: file.name!,
+      });
+    };    
+    return true;
+  };
+
+
+
+  getBase64(file: File): Promise<string | ArrayBuffer | null> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
+
+  previewImage: string | undefined = '';
+  previewVisible = false;
+
+  handlePreview = async (file: NzUploadFile): Promise<void> => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj!);
+    }
+    this.previewImage = file.url || file.preview;
+    this.previewVisible = true;
+  };
+
   private convertBase64ToBlob(base64Audio: string) {
 
     // Split into two parts
@@ -242,4 +347,5 @@ export class DocumentosFormComponent implements OnInit {
     // Return BLOB image after conversion
     return new Blob([uInt8Array], { type: audioType });
   }
+
 }

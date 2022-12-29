@@ -1,0 +1,4 @@
+﻿mongo
+use cafeconmiel  
+db.createCollection("archivos")  
+show collections

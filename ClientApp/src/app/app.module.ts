@@ -29,6 +29,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
 
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+
 import { UsersFormComponent } from './components/admin/users-form/users-form.component';
 import { LogosComponent } from './components/home/logos/logos.component';
 import { ContentComponent } from './components/home/content/content.component';
@@ -77,6 +80,8 @@ import { SafePipe } from './pipes/safe.pipe'
     MatMenuModule,
     FormsModule,
     MatSelectModule,
+    NzUploadModule,
+    NzModalModule,
     ReactiveFormsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     StoreModule.forRoot({}),
