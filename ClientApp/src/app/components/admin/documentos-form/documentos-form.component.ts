@@ -14,7 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { file } from '../../../models/mongo/files';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { FilesService } from '../../../services/http/mongo/files/files.service';
-import { HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -62,11 +62,6 @@ export class DocumentosFormComponent implements OnInit {
 
       this.files = new Array<file>();
       this.filesNGZorro = new Array<NzUploadFile>();
-
-
-      /*if (this.audioBase64) {
-        this.audioBlob = this.convertBase64ToBlob(this.audioBase64);
-      }*/
       this.users = new Array<user>();
       this.editorConfig =  this.localVars.editorConfig
     }
@@ -111,26 +106,25 @@ export class DocumentosFormComponent implements OnInit {
     this.form.addControl("textopaleografico", new FormControl((this.local_data ? this.local_data.textopaleografico : ''), Validators.required));
     this.form.addControl("textocritico", new FormControl((this.local_data ? this.local_data.textocritico : ''), Validators.required));
 
+    this.getFiles();
+  }
+  getFiles() {
     this.filesService.get(this.data.id!).subscribe((result: Array<file>) => {
       if (result) {
-
         result.forEach((value, key) => {
-
           let ngz: NzUploadFile = {
             uid: value.id ? value.id : '',
             name: value.fileName,
-            url: value.fileData ? "data:image/" + value.extension.toLowerCase().replace('.', '') + ";base64," + value.fileData : ''
+            url: value.fileData ? value.fileData : ''
           };
-          this.filesNGZorro.concat(ngz);
-
-        });        
+          this.beforeUploadInit(ngz);
+        });
       }
     }, err => {
       console.log(err)
     });
 
   }
-
   getAllUsers() {
     this.usersService.getAll().subscribe((result: Array<user>) => {
       if (result) {
@@ -191,7 +185,6 @@ export class DocumentosFormComponent implements OnInit {
               });
             });            
           }
-
           this.dialogRef.close(result);
         }
       }, err => {
@@ -242,23 +235,19 @@ export class DocumentosFormComponent implements OnInit {
               });
             });
           }
-
           this.dialogRef.close(result);
         }
       }, err => {
         console.log(err)
       });
-    }
-    
+    }    
   }
   docTypeChange(event: any) {
     if (event.value != "") {
-
     }
   }
   userChange(event: any) {
     if (event.value != "") {
-
     }
   }
   uploadFileEvt(imgFile: any) {
@@ -267,23 +256,16 @@ export class DocumentosFormComponent implements OnInit {
       Array.from(imgFile.target.files).forEach((file: any) => {
         this.audioBase64Name += file.name;
       });
-      // HTML5 FileReader API
       let reader = new FileReader();
         reader.onload = (e: any) => {
         this.audioBase64 = e.target.result;
-
-        /*if (this.audioBase64) {
-          this.audioBlob = this.convertBase64ToBlob(this.audioBase64);
-        }*/
       };
       reader.readAsDataURL(imgFile.target.files[0]);
-      // Reset if duplicate image uploaded again
       this.fileInput.nativeElement.value = '';
     } else {
       this.audioBase64Name = 'Selecciona fichero de audio';
     }
-  }
-  
+  }  
   beforeUpload = (file: NzUploadFile): boolean => {
     this.filesNGZorro = this.filesNGZorro.concat(file);
     const myReader = new FileReader();
@@ -302,9 +284,20 @@ export class DocumentosFormComponent implements OnInit {
     };    
     return true;
   };
+  handleRemove = (file: NzUploadFile) => new Observable<boolean>((obs) => {
+    this.filesService.delete(file.uid).subscribe((result: file) => {
+      if (result) {
+        this.dialogRef.close(result);
+      }
+    }, err => {
+      console.log(err)
+    })
+  });
 
-
-
+  beforeUploadInit = (file: NzUploadFile): boolean => {
+    this.filesNGZorro = this.filesNGZorro.concat(file);   
+    return true;
+  };
   getBase64(file: File): Promise<string | ArrayBuffer | null> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();

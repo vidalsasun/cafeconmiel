@@ -228,6 +228,7 @@
       <nz-upload nzListType="picture-card"
                  [(nzFileList)]="filesNGZorro"
                  [nzBeforeUpload]="beforeUpload"
+                 [nzRemove]="handleRemove"
                  [nzShowButton]="filesNGZorro.length < 2"
                  [nzPreview]="handlePreview">
         <div>

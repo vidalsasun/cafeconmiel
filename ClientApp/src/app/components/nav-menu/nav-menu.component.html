@@ -24,22 +24,34 @@
             <a class="nav-link" (click)="openLoginModal()">Login</a>
           </li>
 
-          <li class="nav-item" *ngIf="loginredux && loginredux.token != ''" style="cursor:pointer">          
+
+          <li class="nav-item" *ngIf="loginredux && loginredux.token != ''" style="cursor:pointer">
             <a href="#" class="nav-link"
                id="navbarDropdownMenuLink" [matMenuTriggerFor]="admin">
               Admin
             </a>
             <mat-menu #admin="matMenu">
-                <a class="dropdown-item" (click)="setOptionMenu('d')">Documentos</a>
-                <a class="dropdown-item" (click)="setOptionMenu('a')"  *ngIf="loginredux && loginredux.token != '' && loginredux.isAdmin">Usuarios</a>
-                <a class="dropdown-item" (click)="closeConnection()">Cerrar conexión</a>
+              <div class="container">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item" style="cursor:pointer">
+                    <a class="dropdown-item" (click)="setOptionMenu('d')">Documentos</a>
+                  </li>
+                  <li class="nav-item" style="cursor:pointer">
+                    <a class="dropdown-item" (click)="setOptionMenu('a')" *ngIf="loginredux && loginredux.token != '' && loginredux.isAdmin">Usuarios</a>
+                  </li>
+                  <li class="nav-item" style="cursor:pointer">
+                    <a class="dropdown-item" (click)="closeConnection()">Cerrar conexión</a>
+                  </li>
+                </ul>
+              </div>
             </mat-menu>
-
-             
           </li>
+
         </ul>
       </div>
     </div>
   </nav>
+
+
 
 </header>

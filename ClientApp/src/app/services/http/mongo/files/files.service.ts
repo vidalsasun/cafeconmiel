@@ -27,7 +27,7 @@ export class FilesService {
   get(document: string): Observable<Array<file>> {
     return this.http.get<Array<file>>('/api/files/' + document);
   }
-  delete(file: file): Observable<any> {
-    return this.http.delete('/api/files/' + file)
+  delete(document: string): Observable<any> {
+    return this.http.delete('/api/files/' + document);
   }
 }

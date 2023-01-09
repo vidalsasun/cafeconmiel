@@ -1,6 +1,79 @@
 <body>
-  <app-nav-menu></app-nav-menu>
+  <!--<app-nav-menu></app-nav-menu>
   <div class="container" style="margin-left:25px!important;">
-    <router-outlet></router-outlet>    
-  </div>
+    <router-outlet></router-outlet>
+  </div>-->
+  
+  <nz-layout>
+    <nz-header>
+      <div class="logo"></div>
+      <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
+        <li nz-menu-item nzSelected (click)="setOptionMenu('p')">Presentación</li>
+        <li nz-menu-item (click)="setOptionMenu('e')">Equipo de investigación</li>
+        <li nz-menu-item (click)="setOptionMenu('c')">Consulta de los corpus</li>
+        <li nz-menu-item (click)="setOptionMenu('b')">Bibliografía y actividades</li>
+        <li nz-menu-item (click)="openLoginModal()">Login</li>
+      </ul>
+    </nz-header>
+
+    <nz-layout class="layout">
+      <nz-sider nzWidth="200px" nzTheme="light">
+        <ul nz-menu nzTheme="light" nzMode="inline" *ngIf="loginredux && loginredux.token != ''" >
+          <li nz-menu-item (click)="setOptionMenu('d')">
+            <span nz-icon nzType="user"></span>
+            <span>Documentos</span>
+          </li>
+          <li nz-menu-item (click)="setOptionMenu('a')" *ngIf="loginredux && loginredux.token != '' && loginredux.isAdmin">
+            <span nz-icon nzType="video-camera"></span>
+            <span>Usuarios</span>
+          </li>
+          <li nz-menu-item (click)="closeConnection()">
+            <span nz-icon nzType="upload"></span>
+            <span>Cerrar conexión</span>
+          </li>
+        </ul>
+
+        <div class="div-images" nzMode="inline">
+          <img src="../../assets/images/conselleriax190.png">
+          <img src="../../assets/images/ifiscx190.png">
+          <img src="../../assets/images/Illes_sosteniblesx190.png">
+          <img src="../../assets/images/logo_uibx190.gif">
+        </div>
+
+      </nz-sider>
+      <nz-layout>        
+        <nz-content>
+          <div class="inner-content">
+
+            <ng-container *ngIf="op==='p' || op===''">
+              <app-presentacion></app-presentacion>
+            </ng-container>
+            <ng-container *ngIf="op==='e'">
+              <app-equipo></app-equipo>
+            </ng-container>
+            <ng-container *ngIf="op==='c'">
+              <app-consulta></app-consulta>
+            </ng-container>
+            <ng-container *ngIf="op==='b'">
+              <app-bibliografia></app-bibliografia>
+            </ng-container>
+            <ng-container *ngIf="op==='l'">
+              <app-login></app-login>
+            </ng-container>
+            <ng-container *ngIf="op==='a'">
+              <app-admin></app-admin>
+            </ng-container>
+            <ng-container *ngIf="op==='d'">
+              <app-documentos></app-documentos>
+            </ng-container>
+
+          </div>
+
+
+
+        </nz-content>
+        <nz-footer>Este trabajo ha sido financiado por la <b>CAIB</b> a través de la Drecció General de Política Universitària i Recerca con fondos de la Ley de Estancias Turísticas ITS2017-006 en el marco PDR2020/51</nz-footer>
+      </nz-layout>
+    </nz-layout>
+  </nz-layout>
 </body>

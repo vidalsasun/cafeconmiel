@@ -31,6 +31,9 @@ import { MatMenuModule } from '@angular/material/menu';
 
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 
 import { UsersFormComponent } from './components/admin/users-form/users-form.component';
 import { LogosComponent } from './components/home/logos/logos.component';
@@ -82,6 +85,9 @@ import { SafePipe } from './pipes/safe.pipe'
     MatSelectModule,
     NzUploadModule,
     NzModalModule,
+    NzMenuModule,
+    NzLayoutModule,
+    NzBreadCrumbModule,
     ReactiveFormsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     StoreModule.forRoot({}),
