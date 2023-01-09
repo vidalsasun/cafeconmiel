@@ -5,8 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
-import { HomeComponent } from './components/home/home.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,12 +31,9 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 import { UsersFormComponent } from './components/admin/users-form/users-form.component';
-import { LogosComponent } from './components/home/logos/logos.component';
-import { ContentComponent } from './components/home/content/content.component';
-import { FooterComponent } from './components/home/footer/footer.component';
 
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -53,8 +48,6 @@ import { SafePipe } from './pipes/safe.pipe'
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
-    HomeComponent,
     PresentacionComponent,
     EquipoComponent,
     ConsultaComponent,
@@ -62,9 +55,6 @@ import { SafePipe } from './pipes/safe.pipe'
     LoginComponent,
     UsersFormComponent,
     AdminComponent,
-    LogosComponent,
-    ContentComponent,
-    FooterComponent,
     DocumentosComponent,
     DocumentosFormComponent,
     SafePipe
@@ -87,13 +77,13 @@ import { SafePipe } from './pipes/safe.pipe'
     NzModalModule,
     NzMenuModule,
     NzLayoutModule,
-    NzBreadCrumbModule,
+    NzButtonModule,
     ReactiveFormsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     StoreModule.forRoot({}),
     StoreModule.forFeature(loginStateFeatureKey, loginReducer),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' }      
+      { path: '', component: AppComponent, pathMatch: 'full' }      
     ]),
     BrowserAnimationsModule,
     MatToolbarModule,

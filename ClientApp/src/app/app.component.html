@@ -18,7 +18,7 @@
 
     <nz-layout class="layout">
       <nz-sider nzWidth="200px" nzTheme="light">
-        <ul nz-menu nzTheme="light" nzMode="inline" *ngIf="loginredux && loginredux.token != ''" >
+        <ul nz-menu nzTheme="light" nzMode="inline" *ngIf="loginredux && loginredux.token != ''" style="margin-top: 25px;">
           <li nz-menu-item (click)="setOptionMenu('d')">
             <span nz-icon nzType="user"></span>
             <span>Documentos</span>
@@ -41,10 +41,9 @@
         </div>
 
       </nz-sider>
-      <nz-layout>        
-        <nz-content>
-          <div class="inner-content">
-
+      <nz-layout class="layout-background-image">        
+        <nz-content style="background: rgba(255,255,255, 0.7);">
+          <div class="inner-content" style="background: rgba(255,255,255, 0.7);">
             <ng-container *ngIf="op==='p' || op===''">
               <app-presentacion></app-presentacion>
             </ng-container>

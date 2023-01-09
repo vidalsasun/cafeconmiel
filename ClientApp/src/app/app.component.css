@@ -11,7 +11,9 @@ nz-header {
 nz-content {
   margin: 24px 16px 0;
 }
-
+.layout-background-image {
+  background-image: url(../assets/images/texto_fondo.jpg);
+}
 .inner-content {
   padding: 24px;
   background: #fff;
