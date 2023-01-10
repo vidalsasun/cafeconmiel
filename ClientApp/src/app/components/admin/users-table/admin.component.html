@@ -16,8 +16,6 @@
       <ng-container matColumnDef="isadmin">
         <mat-header-cell *matHeaderCellDef>Admin</mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.isAdmin ? '&#10003;' : '&#10005;'}} </mat-cell>
-
-
       </ng-container>
 
       <ng-container matColumnDef="creationdate">
@@ -25,19 +23,19 @@
         <mat-cell *matCellDef="let element">{{element.creationdate | date: "dd-MM-yyyy" }}</mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="editaction">
+      <ng-container matColumnDef="deleteaction">
         <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button mat-mini-fab class="minifab-no-shadow" (click)="deleteUser(element)" *ngIf="!element.isAdmin">
+          <button nz-button nzType="primary" nzShape="circle" (click)="deleteUser(element)" *ngIf="!element.isAdmin">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="deleteaction">
+      <ng-container matColumnDef="editaction">
         <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button mat-mini-fab class="minifab-no-shadow" (click)="editUser(element)" *ngIf="!element.isAdmin">
+          <button nz-button nzType="primary" nzShape="circle" (click)="editUser(element)" *ngIf="!element.isAdmin">
             <mat-icon>edit</mat-icon>
           </button>
         </mat-cell>
@@ -53,7 +51,7 @@
 
   </div>
   <div class="demo-button-container">
-    <button mat-raised-button (click)="createUser()" class="demo-button">
+    <button nz-button nzType="primary"(click)="createUser()">
       Crear usuario
     </button>
   </div>

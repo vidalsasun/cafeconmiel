@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { Store } from '@ngrx/store';
+import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { User } from 'oidc-client';
 import { document } from '../../../models/mongo/documents';
 import { user } from '../../../models/mongo/users';
@@ -11,6 +12,8 @@ import { DocumentsService } from '../../../services/http/mongo/documents/documen
 import { UsersService } from '../../../services/http/mongo/users/users.service';
 import { LoginSelectors } from '../../../store/login';
 import { DocumentosFormComponent } from '../documentos-form/documentos-form.component';
+import { NzMessageService } from 'ng-zorro-antd/message';
+
 
 @Component({
   selector: 'app-documentos',
@@ -23,9 +26,11 @@ export class DocumentosComponent implements OnInit {
   dataSource!: Array<document>;
   loaded: boolean = false;
   loginredux!: reduxLoginModel;
+  fileType: string = '.txt';
 
   constructor(private documentsService: DocumentsService,
     private usersService: UsersService,
+    private msg: NzMessageService,
     private store: Store,
     public dialog: MatDialog) {
     this.documents = new Array<document>();
@@ -112,5 +117,16 @@ export class DocumentosComponent implements OnInit {
         this.getAllDocuments();
       }
     });
-  }  
+  }
+  handleChange({ file, fileList }: NzUploadChangeParam): void {
+    const status = file.status;
+    if (status !== 'uploading') {
+      console.log(file, fileList);
+    }
+    if (status === 'done') {
+      this.msg.success(`${file.name} file uploaded successfully.`);
+    } else if (status === 'error') {
+      this.msg.error(`${file.name} file upload failed.`);
+    }
+  }
 }

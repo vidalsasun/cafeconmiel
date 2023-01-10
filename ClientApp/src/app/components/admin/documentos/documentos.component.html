@@ -47,19 +47,20 @@
         <mat-cell *matCellDef="let element">{{element.creationDate | date: "dd-MM-yyyy"}}</mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="editaction">
+
+      <ng-container matColumnDef="deleteaction">
         <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button mat-mini-fab class="minifab-no-shadow" (click)="deleteDocument(element)" *ngIf="!element.isAdmin">
+          <button nz-button nzType="primary" nzShape="circle" (click)="deleteDocument(element)" *ngIf="!element.isAdmin">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="deleteaction">
+      <ng-container matColumnDef="editaction">
         <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button mat-mini-fab class="minifab-no-shadow" (click)="editDocument(element)" *ngIf="!element.isAdmin">
+          <button nz-button nzType="primary" nzShape="circle" (click)="editDocument(element)" *ngIf="!element.isAdmin">
             <mat-icon>edit</mat-icon>
           </button>
         </mat-cell>
@@ -75,8 +76,25 @@
 
   </div>
   <div class="demo-button-container">
-    <button mat-raised-button (click)="uploadDocument()" color="primary">
-      Subir documento
-    </button>
+
+    <!--<button type="submit" nz-button nzType="primary" (click)="uploadDocument()">
+      Subir documento manual
+    </button>-->
+
+     <nz-upload nzType="drag"
+               [nzMultiple]="true"
+               [nzAccept]="fileType" 
+               nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+               (nzChange)="handleChange($event)">
+      <p class="ant-upload-drag-icon">
+        <span nz-icon nzType="inbox"></span>
+      </p>
+      <p class="ant-upload-text">Pulse para subir uno o más ficheros</p>
+      <p class="ant-upload-hint">
+        Los archivos han de tener la extension txt y el formato informado en las especificaciones
+      </p>
+    </nz-upload>
+
+
   </div>
 </ng-container>

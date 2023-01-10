@@ -32,6 +32,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 import { UsersFormComponent } from './components/admin/users-form/users-form.component';
 
@@ -77,6 +78,7 @@ import { SafePipe } from './pipes/safe.pipe'
     NzModalModule,
     NzMenuModule,
     NzLayoutModule,
+    NzMessageModule,
     NzButtonModule,
     ReactiveFormsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
